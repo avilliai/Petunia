@@ -1,3 +1,7 @@
+<div align="center">
+   <img width="70%" height="70%" src="https://moe-counter.glitch.me/get/@:berglm" alt="logo"></br>
+</div>
+
 # 部署
 从release下载最新的压缩包<br>
 解压<br>
@@ -6,9 +10,9 @@
 # 如何填写settings.yaml
 >settings.yaml配置文件的每一个可配置项基本都有注释
 
-首先是填写这一部分<br>
+这里是十分重要的一部分<br>
 请确保已安装[mirai-api-http](https://github.com/project-mirai/mirai-api-http) 并[正确配置](https://github.com/avilliai/wReply/blob/master/setting.yml) <br>
-我们的**chatglm使用的是[外部服务](https://open.bigmodel.cn/) 你需要去注册并获取一个apikey**，填写进chatGLMKey，付费api但价格还算合适
+项目的**chatglm使用的是[外部服务](https://open.bigmodel.cn/) 你需要去注册并获取一个apikey**，填写进chatGLMKey，付费api但价格还算合适
 ```
 bot:
   http-api-key: '1234567890'   #mirai-api-http的vertify key
