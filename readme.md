@@ -1,13 +1,9 @@
-<div align="center">
-   <img width="70%" height="70%" src="https://moe-counter.glitch.me/get/@:berglm" alt="logo"></br>
-</div>
-
-# 部署
+# 🚀部署
 从release下载最新的压缩包<br>
 解压<br>
 填写settings.yaml<br>
 双击berglm.exe
-# 如何填写settings.yaml
+# 😭如何填写settings.yaml
 >settings.yaml配置文件的每一个可配置项基本都有注释
 
 这里是十分重要的一部分<br>
@@ -22,7 +18,7 @@ bot:
   botname: yucca               #机器人的名字
 chatGLMKey: fsldkjfsldfsahfol #chatGLM的apiKey，从https://open.bigmodel.cn/获取
 ```
-# 部署语音合成sever(可选)
+# 😎部署语音合成sever(可选)
 部署后配置settings.yaml中对应的项，如果你部署了，那么请把下面的选项设置为0-100的数字，否则不会调用，其余配置项都有相应的注释，请自行查看<br>
 speaker必须是你在语音合成服务中已经部署了的模型
 ```
@@ -35,7 +31,7 @@ chatGLM:
 把输出的url粘贴进settings.yaml
 ## 本地部署
 [bert_vits_sever](https://github.com/avilliai/Bert_Vits2_Sever/tree/master)
-# 可用指令
+# 🎲可用指令
 ```
 授权#qq号     #给特定用户授权
 授权群#群号    #给群授权
@@ -47,3 +43,8 @@ chatGLM:
 /chat你好   #gpt3.5
 
 ```
+# 😭最后
+喜欢项目的话给个star喵，谢谢喵
+<div align="center">
+   <img width="70%" height="70%" src="https://moe-counter.glitch.me/get/@:berglm" alt="logo"></br>
+</div>
