@@ -121,6 +121,12 @@ class CListen(threading.Thread):
 
         self.mLoop.run_forever()
 def main(bot,logger):
+    file_object = open("data/mylog.log")
+    try:
+        all_the_text = file_object.read()
+    finally:
+        file_object.close()
+    print(all_the_text)
     #读取个性化角色设定
     with open('data/chatGLMCharacters.yaml', 'r', encoding='utf-8') as f:
         result2223 = yaml.load(f.read(), Loader=yaml.FullLoader)
@@ -586,8 +592,11 @@ if __name__ == '__main__':
     master=int(config.get('master'))
 
 
+
     #芝士logger
     logger=newLogger()
-    logger.info("hello")
+    logger.info("欢迎使用")
+    logger.info("项目源地址：https://github.com/avilliai/Bergml")
+    logger.info("语音合成sever部署：https://colab.research.google.com/drive/1n8lI6pOiDtli2zC5fL9PZ9TZqbOafqma?usp=sharing")
     main(bot,logger)
     bot.run()
