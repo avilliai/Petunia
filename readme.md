@@ -18,7 +18,7 @@ bot:
   botname: yucca               #机器人的名字
 chatGLMKey: fsldkjfsldfsahfol #chatGLM的apiKey，从https://open.bigmodel.cn/获取
 ```
-# 😎部署语音合成sever(可选)
+# 😎部署语音合成服务(可选)
 部署后配置settings.yaml中对应的项，如果你部署了，那么请把下面的选项设置为0-100的数字，否则不会调用，其余配置项都有相应的注释，请自行查看<br>
 speaker必须是你在语音合成服务中已经部署了的模型
 ```
@@ -37,6 +37,7 @@ chatGLM:
 授权群#群号    #给群授权
 取消授权#qq号   #你知道的
 取消授权群#群号 
+xx说xxxx     #语音合成服务，需要完成语音合成sever部署
 #下面是一些其他的api，不稳定，只是附加功能，不需要配置，不支持多轮对话，项目的重点是chatglm+bert_vits2，这些以后或许会专门做
 /xh你好     #讯飞星火
 /wx你好     #文心一言
