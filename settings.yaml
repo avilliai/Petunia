@@ -9,7 +9,7 @@ chatGLMKey: fsldkjfsldfsahfol #chatGLM的apiKey，从https://open.bigmodel.cn/�
 proxy: 'http://127.0.0.1:1080'  #代理，使用colab部署语音合成的话必须填写，如果是clash一般是'http://127.0.0.1:7890'
 #bert_vits_colab版本，不占用本地gpu， 请注意，使用此功能必须配置上面的proxy项；
 #如本地部署请将此项修改为bert_colab: ""
-bert_colab: ""           #部署：https://colab.research.google.com/drive/1n8lI6pOiDtli2zC5fL9PZ9TZqbOafqma?usp=sharing，将要访问的url(以/synthesize结尾)粘贴在这里
+bert_colab: ""           #部署：https://colab.research.google.com/drive/1n8lI6pOiDtli2zC5fL9PZ9TZqbOafqma?usp=sharing，将要访问的url(以/synthesize结尾)粘贴进""之中
 
 #bert_vits2语音合成配置
 #根据 bert_vits_sever/characters.yaml填写所有可用的speakers，不填对应的speaker则无法通过Manyana调用
