@@ -28,7 +28,7 @@ chatGLM:
   context: True         #chatGLM上下文模式，开启后将加速消耗token
   maxPrompt: 10              #上下文模式开启时，最多记录的问答数量，默认10，即记录5对问答
   #下面是chatglm的语音合成配置部分
-  maxLen: 90    #语音合成最大长度限制，超出则返回文本。
+  maxLen: 30    #语音合成最大长度限制，超出则返回文本。
   voiceRate: 0 #语音回复几率,为0则不开启
   speaker: 东雪莲    #bert_vits语音合成默认设置角色
   withText: true    #使用语音合成时，发送语音是否附带原始文本(你知道的，塔菲很唐，说话不太清)
