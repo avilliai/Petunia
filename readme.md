@@ -1,6 +1,7 @@
 # 须知
 - 请确保已安装[mirai-api-http](https://github.com/project-mirai/mirai-api-http) 并[正确配置](https://github.com/avilliai/wReply/blob/master/setting.yml) <br>
 - 需要[获取apikey](https://open.bigmodel.cn/)
+- 本项目分离自[Manyana](https://github.com/avilliai/Manyana) 
 # 🚀部署
 从[release下载](https://github.com/avilliai/Bergml/releases/tag/chaglm) 最新的压缩包<br>
 解压<br>
@@ -57,8 +58,7 @@ chatGLM:
 授权群#群号    #给群授权
 xx说xxxx     #语音合成服务，需要完成语音合成sever部署
 ```
-# 😭最后
-喜欢项目的话给个star喵，谢谢喵
+
 <div align="center">
    <img width="70%" height="70%" src="https://moe-counter.glitch.me/get/@:berglm" alt="logo"></br>
 </div>
