@@ -277,7 +277,7 @@ def main(bot,logger):
                         # st1 = await chatGLM(selfApiKey, meta1, prompt)
                     except Exception as e:
                         logger.error(e)
-                        await bot.send(event, "gemini启动出错\n请发送 /clear 以清理聊天记录并重试\n或发送 @bot 可用角色模板 以更换其他模型")
+                        await bot.send(event, "gemini启动出错\n请重试")
                 elif type(chatGLMCharacters.get(event.sender.id)) == dict:
                     text = str(event.message_chain).replace("@" + str(bot.qq) + "", '').replace(" ", "")
                     logger.info("分支1")
@@ -336,7 +336,7 @@ def main(bot,logger):
 
 
                     except:
-                        await bot.send(event, "chatGLM启动出错，请联系master\n或发送 @bot 可用角色模板 以更换其他模型")
+                        await bot.send(event, "chatGLM启动出错，请联系master\n或重试")
             # 判断模型
             elif replyModel == "gpt3.5":
 
@@ -393,7 +393,7 @@ def main(bot,logger):
                     # 写入文件
                     with open('data/GeminiData.yaml', 'w', encoding="utf-8") as file:
                         yaml.dump(GeminiData, file, allow_unicode=True)
-                    await bot.send(event, "gemini启动出错\n请发送 /clear 以清理聊天记录并重试\n或发送 @bot 可用角色模板 以更换其他模型")
+                    await bot.send(event, "gemini启动出错\n请重试")
             elif replyModel == "characterglm":
                 text = str(event.message_chain).replace("@" + str(bot.qq) + "", '').replace(" ", "")
                 logger.info("分支1")
@@ -441,7 +441,7 @@ def main(bot,logger):
 
 
                 except:
-                    await bot.send(event, "chatGLM启动出错，请联系master\n或发送 @bot 可用角色模板 以更换其他模型")
+                    await bot.send(event, "chatGLM启动出错，请联系master\n或重试")
 
     @bot.on(GroupMessage)
     async def permitUserandGroup(event:GroupMessage):
@@ -606,7 +606,7 @@ def main(bot,logger):
             except Exception as e:
                 logger.error("清理用户prompt出错")
 
-            await bot.send(event, "出错，自动清理异常prompt.....请重试，如果无效请 联系master反馈问题\n或发送 \n@bot 可用角色模板\n 以更换其他模型", True)
+            await bot.send(event, "出错，自动清理异常prompt.....请重试，如果无效请 联系master反馈问题", True)
 
     async def superVG(data, mode, langmode="<zh>"):
         if langmode == "<jp>":
