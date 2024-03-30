@@ -1,5 +1,5 @@
 bot:
-  http-api-key: '1234567890'   #mirai-api-http的vertify key
+  http-api-key: '1234567890'   #mirai-api-http的verify key
   http-api-port: 23456         #mirai-api-http的port
   botqq: 919467430             #机器人的qq
   master: 1840094972           #你的qq
@@ -18,7 +18,7 @@ proxy: ""             #代理，如果是clash，一般填"http://127.0.0.1:7890
 chatGLM:
   model: lolimigpt    #模型可选lolimigpt(免费无需key，不稳定)/glm-4(免费无需key，不稳定)/Gemini(免费需代理，配置geminiapiKey)/Cozi(免费需代理，配置CoziUrl)/characterglm(付费，配置chatGLMKey)/gpt3.5(付费，配置openaikeys)
   #下面两个开关都关闭时，只有授权群可用
-  glmReply: false         #开放群聊chatglm
+  glmReply: True        #开放群聊chatglm
   privateGlmReply: false   #仅信任用户可用
   context: True         #chatGLM上下文模式，开启后将加速消耗token
   maxPrompt: 10              #上下文模式开启时，最多记录的问答数量，默认10，即记录5对问答
