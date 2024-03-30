@@ -13,10 +13,10 @@ apiKeys:
     - xxxxxxx
     - xxxxxxx
   CoziUrl: "xxxxx"    #coze+discord白嫖gpt4，需要部署，参考https://github.com/avilliai/Manyana/issues/4
-proxy: "http://127.0.0.1:10809"             #代理，如果是clash，一般填"http://127.0.0.1:7890" 如果ssr，一般"http://127.0.0.1:1080" 如果v2ray，一般"http://127.0.0.1:10809"
+proxy: ""             #代理，如果是clash，一般填"http://127.0.0.1:7890" 如果ssr，一般"http://127.0.0.1:1080" 如果v2ray，一般"http://127.0.0.1:10809"
 #chatglm配置
 chatGLM:
-  model: Gemini    #模型可选lolimigpt(免费无需key，不稳定)/glm-4(免费无需key，不稳定)/Gemini(免费需代理，配置geminiapiKey)/Cozi(免费需代理，配置CoziUrl)/characterglm(付费，配置chatGLMKey)/gpt3.5(付费，配置openaikeys)
+  model: lolimigpt    #模型可选lolimigpt(免费无需key，不稳定)/glm-4(免费无需key，不稳定)/Gemini(免费需代理，配置geminiapiKey)/Cozi(免费需代理，配置CoziUrl)/characterglm(付费，配置chatGLMKey)/gpt3.5(付费，配置openaikeys)
   #下面两个开关都关闭时，只有授权群可用
   glmReply: false         #开放群聊chatglm
   privateGlmReply: false   #仅信任用户可用

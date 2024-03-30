@@ -850,6 +850,10 @@ if __name__ == '__main__':
     logger=newLogger()
     logger.info("欢迎使用")
     logger.info("项目源地址：https://github.com/avilliai/Bergml")
-    logger.info("此项目拆分自Manyana：https://mirai.mamoe.net/topic/2394/manyana-%E5%85%8D%E8%B4%B9-%E5%AE%98%E6%96%B9gpt3-5-gemini-free-gpt4-free-chatglm-bert_vits2%E8%AF%AD%E9%9F%B3%E5%90%88%E6%88%90-%E6%97%A0%E9%9C%80%E6%90%AD%E5%BB%BA-%E5%8A%9F%E8%83%BD%E9%9B%86%E5%90%88")
+    logger.info("此项目拆分自Manyana：https://github.com/avilliai/Manyana")
     main(bot,logger)
-    bot.run()
+    try:
+        bot.run()
+    except Exception as e:
+        logger.error(e)
+        input("出错，按任意键退出")
