@@ -11,7 +11,7 @@
 
 这里是十分重要的一部分<br>
 ## 与Mirai连接
-确保已安装[mirai-api-http](https://github.com/project-mirai/mirai-api-http) 并[正确配置](https://github.com/avilliai/wReply/blob/master/setting.yml)<br>
+确保已安装[mirai-api-http](https://github.com/project-mirai/mirai-api-http) 并[正确配置](https://github.com/avilliai/wReply/blob/master/setting.yml) <br>
 ```
 bot:
   http-api-key: '1234567890'   #mirai-api-http的vertify key
@@ -24,7 +24,9 @@ bot:
 模型可选lolimigpt(免费无需key，不稳定)/glm-4(免费无需key，不稳定)/Gemini(免费需代理，配置geminiapiKey)/Cozi(免费需代理，配置CoziUrl)/characterglm(付费，配置chatGLMKey)/gpt3.5(付费，配置openaikeys)<br>
 ```
 chatGLM:
+  .......
   model: Gemini    #在这里选择你的模型
+  .......
 ```
 ## 配置模型对应的apikey
 ```
@@ -43,6 +45,7 @@ proxy: "http://127.0.0.1:10809"             #代理，如果是clash，一般填
 ## 设置语音合成
 ```
 chatGLM:
+  ......(前略)
   #语音合成配置部分
   voiceGenerateSource: modelscopeTTS  #可选modelscopeTTS和outVits
   maxLen: 70    #语音合成最大长度限制，超出则返回文本。
@@ -50,6 +53,7 @@ chatGLM:
   langType: "<zh>"  #语音合成语言类型，仅对modelscopeTTS部分角色生效
   #modelscopeTTS模式可用角色["BT","塔菲","阿梓","otto","丁真","星瞳","东雪莲","嘉然","孙笑川","亚托克斯","文静","鹿鸣","奶绿","七海","恬豆","科比"]，该模式下任选其一填入即可
   speaker: 东雪莲          #语音合成默认音源，根据你的合成模式设定。outVits模式的角色(个人推荐填 瑶瑶)看https://api.lolimi.cn/?action=doc&id=181
+  ......(后略)
 ```
 # 🎲可用指令
 ```
