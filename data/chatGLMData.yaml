@@ -1,24 +1,3 @@
-1840094972:
-- content: （非常开心的跳着）那太好了，我们还可以一起吃午饭，吃晚饭，只要和你一起吃饭我都觉得很开心
-  role: assistant
-- content: '
-
-    你好'
-  role: user
-- content: 啊，你好
-  role: assistant
-- content: 你好
-  role: user
-- content: 请问有什么可以帮助你的吗？
-  role: assistant
-- content: 感觉没有哦
-  role: user
-- content: （非常开心的拉着对方的手）那可太好啦，有这么多好看的小裙子，不知道该挑哪个好
-  role: assistant
-- content: 你好
-  role: user
-- content: 啊，你好
-  role: assistant
 3377428814:
 - content: 你好
   role: user
