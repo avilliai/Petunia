@@ -34,7 +34,7 @@ apiKeys:
   #支持填写多个key
   chatGLMKey: xxxxxx  #chatGLM的apiKey，从https://open.bigmodel.cn/获取
   geminiapiKey:       #gemini，从https://ai.google.dev/tutorials/setup?hl=zh-cn获取
-    - AIzaSyDreHeyhw-lUKs3ecDg4IQ7CC31SXi5rNk
+    - xxxxxx
   openaikeys:         #openai官方apikey，需要代理
     - xxxxxxx
     - xxxxxxx
