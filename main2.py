@@ -95,22 +95,56 @@ async def lolimigpt2(prompt,meta):
     async with httpx.AsyncClient(timeout=200) as client:
         r = await client.post(url=url,json=prompt)
         return {"role":"assistant","content":r.text}
-async def geminirep(ak,messages):
+
+
+async def geminirep(ak, messages):
     # Or use `os.getenv('GOOGLE_API_KEY')` to fetch an environment variable.
-    GOOGLE_API_KEY=ak
+    GOOGLE_API_KEY = ak
 
     genai.configure(api_key=GOOGLE_API_KEY)
 
-    model = genai.GenerativeModel('gemini-pro')
+    # model = genai.GenerativeModel('gemini-pro')
+    generation_config = {
+        "candidate_count": 1,
+        "max_output_tokens": 256,
+        "temperature": 1.0,
+        "top_p": 0.7,
+    }
 
+    safety_settings = [
+        {
+            "category": "HARM_CATEGORY_DANGEROUS",
+            "threshold": "BLOCK_NONE",
+        },
+        {
+            "category": "HARM_CATEGORY_HARASSMENT",
+            "threshold": "BLOCK_NONE",
+        },
+        {
+            "category": "HARM_CATEGORY_HATE_SPEECH",
+            "threshold": "BLOCK_NONE",
+        },
+        {
+            "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+            "threshold": "BLOCK_NONE",
+        },
+        {
+            "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+            "threshold": "BLOCK_NONE",
+        },
+    ]
 
+    model = genai.GenerativeModel(
+        model_name="gemini-pro",
+        generation_config=generation_config,
+        safety_settings=safety_settings
+    )
 
-    #print(type(messages))
+    # print(type(messages))
 
     response = model.generate_content(messages)
 
-
-    print(response.text)
+    # print(response.text)
     return response.text
 async def glm4(prompt,meta):
     prompt.insert(0,{"role":"user","content":meta})
