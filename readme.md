@@ -2,7 +2,7 @@
 - 请确保已安装[mirai-api-http](https://github.com/project-mirai/mirai-api-http) 并[正确配置](https://github.com/avilliai/wReply/blob/master/setting.yml) <br>
 - 本项目分离自[Manyana](https://github.com/avilliai/Manyana) 
 # 🚀部署
-从[release下载](https://github.com/avilliai/Bergml/releases/tag/chaglm) 最新的压缩包<br>
+从[release下载](https://github.com/avilliai/Bergml/releases) 最新的压缩包<br>
 解压<br>
 填写settings.yaml<br>
 双击berglm.exe
