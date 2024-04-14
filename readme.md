@@ -3,7 +3,7 @@
   - [下载mirai-api-http](https://github.com/project-mirai/mirai-api-http) 放进mirai/plugins文件夹
   - 启动一次Mirai，关闭
   - 用[配置](https://github.com/avilliai/wReply/blob/master/setting.yml) 替换config/net.mamoe.mirai-api-http/setting.yml
-  - 启动mirai
+  - 启动mirai，至此，完成Mirai部分配置
 - 本项目分离自[Manyana](https://github.com/avilliai/Manyana) 
 # 🚀部署
 从[release下载](https://github.com/avilliai/Bergml/releases) 最新的压缩包<br>
