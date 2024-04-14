@@ -1,3 +1,4 @@
+[为看不懂文档的用户准备的视频教程](https://github.com/avilliai/Bergml/releases/tag/idn)
 # 须知
 - 请确保已安装[mirai-api-http](https://github.com/project-mirai/mirai-api-http) 并[正确配置](https://github.com/avilliai/wReply/blob/master/setting.yml) <br>
   - [下载mirai-api-http](https://github.com/project-mirai/mirai-api-http) 放进mirai/plugins文件夹
