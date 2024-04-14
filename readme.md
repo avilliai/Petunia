@@ -8,9 +8,9 @@
 # 🚀部署
 从[release下载](https://github.com/avilliai/Bergml/releases) 最新的压缩包<br>
 解压<br>
-填写settings.yaml<br>
+填写Petunia/settings.yaml<br>
 双击berglm.exe
-# ☁如何填写settings.yaml
+# ☁如何填写Petunia/settings.yaml
 >settings.yaml配置文件的每一个可配置项基本都有注释
 
 这里是十分重要的一部分<br>
