@@ -11,7 +11,7 @@ import requests
 import yaml
 import google.generativeai as genai
 import zhipuai
-from mirai import Mirai, WebSocketAdapter, Voice, GroupMessage, At, Plain
+from mirai import Mirai, WebSocketAdapter, Voice, GroupMessage, At, Plain, Image
 from mirai.bot import Startup
 from openai import OpenAI
 class CListen(threading.Thread):
@@ -170,6 +170,26 @@ def gptOfficial(prompt,apikeys,proxy,bot_info):
     )
     #print(chat_completion.choices[0].message.content)
     return {"role":"assistant","content":chat_completion.choices[0].message.content}
+async def drawe(prompt,path= "./test.png"):
+    url=f"https://api.lolimi.cn/API/AI/sd.php?msg={prompt}&mode=动漫"
+
+    async with httpx.AsyncClient(timeout=40) as client:
+        r = await client.get(url)
+        with open(path,"wb") as f:
+            f.write(r.content)
+        # print(path)
+        return path
+async def draw1(prompt,path="./test.png"):
+    url=f"https://api-collect.idcdun.com/v1/images/generations?prompt={prompt}&n=1&model=dall-e-3&size=1024x1024"
+    async with httpx.AsyncClient(timeout=40) as client:
+        r = await client.get(url)
+        url2=r.json().get("data")[0].get("url")
+        async with httpx.AsyncClient(timeout=40) as client:
+            r1 = await client.get(url2)
+        with open(path, "wb") as f:
+            f.write(r1.content)
+        # print(path)
+        return path
 def main(bot,logger):
     with open('data/noRes.yaml', 'r', encoding='utf-8') as f:
         noRes1 = yaml.load(f.read(), Loader=yaml.FullLoader)
@@ -218,7 +238,30 @@ def main(bot,logger):
     global trustUser,trustGroups
     trustUser=trusts.get("users")
     trustGroups=trusts.get("groups")
-
+    @bot.on(GroupMessage)
+    async def aidrawf(event: GroupMessage):
+        if str(event.message_chain).startswith("画 "):
+            tag=str(event.message_chain).replace("画 ","")
+            if os.path.exists("./data/pictures"):
+                pass
+            else:
+                os.mkdir("./data/pictures")
+            path = "data/pictures/" + random_str() + ".png"
+            logger.info("发起ai绘画请求，path:"+path+"|prompt:"+tag)
+            try:
+                logger.info("接口1绘画中......")
+                p=await drawe(tag,path)
+                await bot.send(event,Image(path=p),True)
+            except Exception as e:
+                logger.error(e)
+                await bot.send(event,"接口绘画失败.......")
+            try:
+                logger.info("接口2绘画中......")
+                p=await draw1(tag,path)
+                await bot.send(event,Image(path=p),True)
+            except Exception as e:
+                logger.error(e)
+                await bot.send(event,"接口2绘画失败.......")
     # 用于chatGLM清除本地缓存
     @bot.on(GroupMessage)
     async def clearPrompt(event: GroupMessage):
