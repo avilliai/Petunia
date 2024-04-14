@@ -16,6 +16,7 @@
 这里是十分重要的一部分<br>
 ## 与Mirai连接
 确保已安装[mirai-api-http](https://github.com/project-mirai/mirai-api-http) 并[正确配置](https://github.com/avilliai/wReply/blob/master/setting.yml) <br>
+如果你用的是[配置](https://github.com/avilliai/wReply/blob/master/setting.yml) ，编辑后三项即可<br>
 ```
 bot:
   http-api-key: '1234567890'   #mirai-api-http的vertify key
