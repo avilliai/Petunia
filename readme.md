@@ -14,7 +14,7 @@
 >settings.yaml配置文件的每一个可配置项基本都有注释
 
 这里是十分重要的一部分<br>
-## 与Mirai连接
+## 与Mirai连接(overflow用户一样，本身就一家的。)
 确保已安装[mirai-api-http](https://github.com/project-mirai/mirai-api-http) 并[正确配置](https://github.com/avilliai/wReply/blob/master/setting.yml) <br>
 如果你用的是[配置](https://github.com/avilliai/wReply/blob/master/setting.yml) ，编辑后三项即可<br>
 ```
