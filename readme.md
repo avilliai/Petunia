@@ -1,21 +1,22 @@
+[为看不懂文档的用户准备的视频教程](https://github.com/avilliai/Bergml/releases/tag/idn)
 # 须知
 - 请确保已安装[mirai-api-http](https://github.com/project-mirai/mirai-api-http) 并[正确配置](https://github.com/avilliai/wReply/blob/master/setting.yml) <br>
   - [下载mirai-api-http](https://github.com/project-mirai/mirai-api-http) 放进mirai/plugins文件夹
   - 启动一次Mirai，关闭
   - 用[配置](https://github.com/avilliai/wReply/blob/master/setting.yml) 替换config/net.mamoe.mirai-api-http/setting.yml
-  - 启动mirai
-- 本项目分离自[Manyana](https://github.com/avilliai/Manyana) 
+  - 启动mirai，至此，完成Mirai部分配置
 # 🚀部署
 从[release下载](https://github.com/avilliai/Bergml/releases) 最新的压缩包<br>
 解压<br>
-填写settings.yaml<br>
+填写Petunia/settings.yaml<br>
 双击berglm.exe
-# ☁如何填写settings.yaml
+# ☁如何填写Petunia/settings.yaml
 >settings.yaml配置文件的每一个可配置项基本都有注释
 
 这里是十分重要的一部分<br>
-## 与Mirai连接
+## 与Mirai连接(overflow用户一样，本身就一家的。)
 确保已安装[mirai-api-http](https://github.com/project-mirai/mirai-api-http) 并[正确配置](https://github.com/avilliai/wReply/blob/master/setting.yml) <br>
+如果你用的是[配置](https://github.com/avilliai/wReply/blob/master/setting.yml) ，编辑后三项即可<br>
 ```
 bot:
   http-api-key: '1234567890'   #mirai-api-http的vertify key
