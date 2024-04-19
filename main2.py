@@ -170,6 +170,23 @@ def gptOfficial(prompt,apikeys,proxy,bot_info):
     )
     #print(chat_completion.choices[0].message.content)
     return {"role":"assistant","content":chat_completion.choices[0].message.content}
+def gptUnofficial(prompt,apikeys,proxy,bot_info):
+    os.environ["OPENAI_API_KEY"] = random.choice(apikeys)
+    client = OpenAI(
+        # This is the default and can be omitted
+        base_url="https://api.chatanywhere.com.cn",
+        api_key=os.environ.get("OPENAI_API_KEY"),
+    )
+    prompt.insert(0, {"role": "user", "content": bot_info})
+    prompt.insert(1, {"role": "assistant", "content": "好的主人喵"})
+    chat_completion = client.chat.completions.create(
+        messages=prompt,
+        model="gpt-3.5-turbo",
+        stream=False,
+    )
+    # print(chat_completion.choices[0].message.content)
+    return {"role": "assistant", "content": chat_completion.choices[0].message.content}
+
 async def drawe(prompt,path= "./test.png"):
     url=f"https://api.lolimi.cn/API/AI/sd.php?msg={prompt}&mode=动漫"
 
@@ -215,6 +232,7 @@ def main(bot,logger):
     CoziUrl=result.get("apiKeys").get("CoziUrl")
     botName=result.get("bot").get('botName')
     master=result.get("bot").get("master")
+    gptdev=result.get("gpt3.5-dev")
     if proxy!="":
         os.environ["http_proxy"] = proxy
     newLoop = asyncio.new_event_loop()
@@ -633,7 +651,10 @@ def main(bot,logger):
             logger.info(f"{modelHere}  bot 接受提问：" + text)
             loop = asyncio.get_event_loop()
             if modelHere=="gpt3.5":
-                rep = await loop.run_in_executor(None, gptOfficial, prompt1, gptkeys, proxy, bot_in)
+                if gptdev==False:
+                    rep = await loop.run_in_executor(None, gptOfficial, prompt1, gptkeys, proxy, bot_in)
+                else:
+                    rep = await loop.run_in_executor(None, gptUnofficial, prompt1, gptkeys, proxy, bot_in)
             elif modelHere=="Cozi":
                 rep = await loop.run_in_executor(None, cozeBotRep, CoziUrl, prompt1, proxy)
             elif modelHere=="lolimigpt":
