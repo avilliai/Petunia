@@ -27,13 +27,7 @@ bot:
 ```
 ## 选择模型
 模型可选lolimigpt(免费无需key，不稳定)/glm-4(免费无需key，不稳定)/Gemini(免费需代理，配置geminiapiKey)/Cozi(免费需代理，配置CoziUrl)/characterglm(付费，配置chatGLMKey)/gpt3.5(付费，配置openaikeys)<br>
-```
-chatGLM:
-  .......
-  model: Gemini    #在这里选择你的模型
-  .......
-```
-## 配置模型对应的apikey
+
 
 | 模型(settings.yaml设置)    | 介绍                                                                                                                                   | 配置项(api.yaml)             | 评价                                               |
 | ---------------------- |--------------------------------------------------------------------------------------------------------------------------------------|---------------------------|--------------------------------------------------|
@@ -44,6 +38,14 @@ chatGLM:
 | gpt3.5-dev(模型仍填gpt3.5) | 官方gpt3.5，无需代理，[免费申请apikey](https://github.com/chatanywhere/GPT_API_free?tab=readme-ov-file)                                          | openai-keys<br>gpt3.5-dev | 免费，稳定，无代理时首选                                     |
 | Cozi                   | GPT4，基于[coze-discord](https://github.com/deanxv/coze-discord-proxy)，教程请查看[Here](https://github.com/avilliai/Manyana/issues/4)，最好配置代理 | cozi<br>proxy(建议)         | 免费。需要discord小号，每个账号每天都有次数限制(gpt4 100次/天)，可配置多个小号 |
 | gemini                 | 谷歌Gemini，在这里[申请apikey](https://ai.google.dev/tutorials/setup?hl=zh-cn)，需配置proxy                                                      | gemini<br>proxy           | 免费，稳定，有代理时首选                                     |
+
+```
+chatGLM:
+  .......
+  model: Gemini    #在这里选择你的模型
+  .......
+```
+## 配置模型对应的apikey
 
 ```
 apiKeys:
