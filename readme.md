@@ -80,6 +80,7 @@ chatGLM:
 xx说xxxx     #语音合成服务，需要完成语音合成sever部署
 画 xxxx     #dall-e-3绘画，免费api不太稳定，指令如 画 an anime girlish，only 1 character in picture，white sleeveless dress，chocker，Amyamya，White light blue long hair，the main color of hair is white，cute face，light blue eyes，black ribbon，off-shoulder dress，smiling face，suit for using as   avatar，could see full head with margin，Slightly sideways body
 ```
+>Petunia相当于[Manyana](https://github.com/avilliai/Manyana) 的简化版，更多功能实现都在Manyana中，但部署要比Petunia复杂，如感兴趣可自行查看
 
 <div align="center">
    <img width="70%" height="70%" src="https://moe-counter.glitch.me/get/@:berglm" alt="logo"></br>
