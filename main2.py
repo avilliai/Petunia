@@ -334,7 +334,7 @@ def main(bot,logger):
                 elif chatGLMCharacters.get(event.sender.id) == "Gemini":
                     text = str(event.message_chain).replace("@" + str(bot.qq) + "", '').replace(" ", "").replace("/g", "")
                     for saa in noRes:
-                        if text == saa:
+                        if text == saa or text=="角色":
                             logger.warning("与屏蔽词匹配，Gemini不回复")
                             return
                     logger.info("gemini开始运行")
@@ -377,7 +377,7 @@ def main(bot,logger):
                     text = str(event.message_chain).replace("@" + str(bot.qq) + "", '').replace(" ", "")
                     logger.info("分支1")
                     for saa in noRes:
-                        if text == saa:
+                        if text == saa or text=="角色":
                             logger.warning("与屏蔽词匹配，chatGLM不回复")
                             return
                     if text == "" or text == " ":
@@ -446,7 +446,7 @@ def main(bot,logger):
             elif replyModel == "Gemini" :
                 text = str(event.message_chain).replace("@" + str(bot.qq) + "", '').replace(" ", "").replace("/g", "")
                 for saa in noRes:
-                    if text == saa:
+                    if text == saa or text=="角色":
                         logger.warning("与屏蔽词匹配，Gemini不回复")
                         return
                 logger.info("gemini开始运行")
@@ -493,7 +493,7 @@ def main(bot,logger):
                 text = str(event.message_chain).replace("@" + str(bot.qq) + "", '').replace(" ", "")
                 logger.info("分支1")
                 for saa in noRes:
-                    if text == saa:
+                    if text == saa or text=="角色":
                         logger.warning("与屏蔽词匹配，chatGLM不回复")
                         return
                 if text == "" or text == " ":
@@ -562,7 +562,7 @@ def main(bot,logger):
                     await bot.send(event,"授权失败")
     @bot.on(Startup)
     async def sgggggg(event: Startup):
-        await bot.send_friend_message(master,"master指令：\n授权群#群号\n授权#QQ号\n\n用户指令：\n@bot 角色")
+        await bot.send_friend_message(master,"master指令：\n授权群#群号\n授权#QQ号\n\n用户指令：\n@bot 角色\n画 xxxx")
     @bot.on(GroupMessage)
     async def ttsssss(event: GroupMessage):
         modelScope = ["BT", "塔菲", "阿梓", "otto", "丁真", "星瞳", "东雪莲", "嘉然", "孙笑川", "亚托克斯", "文静", "鹿鸣", "奶绿", "七海", "恬豆",
@@ -584,12 +584,9 @@ def main(bot,logger):
                 logger.info(f"语音合成任务 text: {txt}, speaker: {spk}")
                 p=await superVG({"text": txt, "speaker": spk}, "outVits")
                 await bot.send(event, Voice(path=p))
-        if "角色" in str(event.message_chain) and At(bot.qq) in event.message_chain:
-            str1=""
-            str1 += "outVits语音合成可用角色如下：\n" + str(outVitsSpeakers) + "\n\nbert_vits2可用角色如下：\n" + str(
-                ["BT", "塔菲", "阿梓", "otto", "丁真", "星瞳", "东雪莲", "嘉然", "孙笑川", "亚托克斯", "文静", "鹿鸣", "奶绿", "七海", "恬豆", "科比"])
-            await bot.send(event, str1)
-            await bot.send(event, "可发送 xx说.......  以进行语音合成")
+        if "角色"==str(event.message_chain).replace("@"+str(bot.qq)+" ","") and At(bot.qq) in event.message_chain:
+            logger.info("查询可用角色模板")
+            await bot.send(event,Image(url="https://img2.imgtp.com/2024/04/20/MvtwZXqt.jpg"))
     async def tstt(r, event):
         if len(r) < maxTextLen and random.randint(0, 100) < voiceRate and event.type != 'FriendMessage':
             data1 = {}
@@ -638,8 +635,7 @@ def main(bot,logger):
                 text = "在吗"
             for saa in noRes:
                 #print(text, saa)
-                if text == saa:
-
+                if text == saa or text=="角色":
                     logger.warning("与屏蔽词匹配，不回复")
                     return
             if event.sender.id in chatGLMData:
