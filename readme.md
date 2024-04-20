@@ -78,6 +78,7 @@ chatGLM:
 授权#qq号     #给特定用户授权
 授权群#群号    #给群授权
 xx说xxxx     #语音合成服务，需要完成语音合成sever部署
+画 xxxx     #dall-e-3绘画，由于是免费api，所以不太稳定，指令如 画 an anime girlish，only 1 character in picture，white sleeveless dress，chocker，Amyamya，White light blue long hair，the main color of hair is white，cute face，light blue eyes，black ribbon，off-shoulder dress，smiling face，suit for using as   avatar，could see full head with margin，Slightly sideways body
 ```
 
 <div align="center">
