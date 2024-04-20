@@ -82,6 +82,10 @@ xx说xxxx     #语音合成服务，需要完成语音合成sever部署
 ```
 >Petunia相当于[Manyana](https://github.com/avilliai/Manyana) 的简化版，更多功能实现都在Manyana中，其部署要比Petunia复杂，但教程目前相对完善，如感兴趣可自行查看
 
+# 🎄最后
+如果觉得项目还不错的话给个star喵，给个star谢谢喵
+
 <div align="center">
    <img width="70%" height="70%" src="https://moe-counter.glitch.me/get/@:berglm" alt="logo"></br>
 </div>
+
