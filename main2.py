@@ -326,7 +326,40 @@ def main(bot,logger):
                 await bot.send(event, "已清除所有用户的prompt")
             except:
                 await bot.send(event, "清理缓存出错，无本地对话记录")
+    # 用于chatGLM清除本地缓存
+    @bot.on(FriendMessage)
+    async def clearPrompt(event: FriendMessage):
+        global chatGLMData, GeminiData
+        if str(event.message_chain) == "/clear":
+            try:
+                chatGLMData.pop(event.sender.id)
+                # 写入文件
+                with open('data/chatGLMData.yaml', 'w', encoding="utf-8") as file:
+                    yaml.dump(chatGLMData, file, allow_unicode=True)
+                await bot.send(event, "已清除近期记忆")
+            except:
+                logger.error("清理缓存出错，无本地对话记录")
+            try:
+                GeminiData.pop(event.sender.id)
+                # 写入文件
+                with open('data/GeminiData.yaml', 'w', encoding="utf-8") as file:
+                    yaml.dump(GeminiData, file, allow_unicode=True)
+                await bot.send(event, "已清除近期记忆")
+            except:
+                logger.error("清理缓存出错，无本地对话记录")
+        elif str(event.message_chain) == "/allclear" and event.sender.id == master:
+            try:
+                chatGLMData = {"f": "hhh"}
+                # chatGLMData.pop(event.sender.id)
+                # 写入文件
+                with open('data/chatGLMData.yaml', 'w', encoding="utf-8") as file:
+                    yaml.dump(chatGLMData, file, allow_unicode=True)
 
+                with open('data/GeminiData.yaml', 'w', encoding="utf-8") as file:
+                    yaml.dump(chatGLMData, file, allow_unicode=True)
+                await bot.send(event, "已清除所有用户的prompt")
+            except:
+                await bot.send(event, "清理缓存出错，无本地对话记录")
     # 群内chatGLM回复
     @bot.on(GroupMessage)
     async def atReply(event: GroupMessage):
