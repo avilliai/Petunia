@@ -9,7 +9,7 @@
 从[release下载](https://github.com/avilliai/Bergml/releases) 最新的压缩包<br>
 解压<br>
 填写Petunia/settings.yaml<br>
-双击berglm.exe
+双击main2.exe
 # ☁如何填写Petunia/settings.yaml
 >settings.yaml配置文件的每一个可配置项基本都有注释
 
@@ -31,7 +31,7 @@ bot:
 
 | 模型(settings.yaml中的model设置) | 介绍                                                                                                                                   | 配置项(apikeys对应)             | 评价                                               |
 |----------------|--------------------------------------------------------------------------------------------------------------------------------------|---------------------------|--------------------------------------------------|
-| characterglm   | 智谱的超拟人大模型，在这里[申请](https://open.bigmodel.cn/)                                                                                         | chatGLMKey                   | 付费api，贵，敏感词多，但效果不错                               |
+| characterglm   | 智谱的超拟人大模型，在这里[申请](https://open.bigmodel.cn/)                                                                                         | chatGLMKey                   | 付费api，效果好。群少/自用可优先选择                              |
 | lolimigpt      | 免费gpt3.5                                                                                                                             | 【无需配置】                    | 免费，不稳定                                           |
 | glm-4          | 免费glm-4                                                                                                                              | 【无需配置】                    | 免费，不稳定                                           |
 | gpt3.5         | 官方gpt3.5，需要填写代理proxy项                                                                                                                | openai-keys<br>proxy      | 不建议使用，官方贵，并且需要配置代理                               |
