@@ -12,6 +12,7 @@ apiKeys:
   openaikeys:         #openai官方apikey(需要代理)|或免费从(这个不用代理)https://github.com/chatanywhere/GPT_API_free?tab=readme-ov-file申请apikey并打开gpt3.5-dev开关
     - sk-xxxx
   CoziUrl: "xxxxx"    #coze+discord白嫖gpt4，需要部署，参考https://github.com/avilliai/Manyana/issues/4
+  modelscopeCookie: ""  #modelcop更新反爬策略，需要cookie，参考https://github.com/avilliai/Manyana/issues/7
 gpt3.5-dev: false     #申请的免费apikey请将此选项修改为True
 proxy: ""             #代理，如果是clash，一般填"http://127.0.0.1:7890" 如果ssr，一般"http://127.0.0.1:1080" 如果v2ray，一般"http://127.0.0.1:10809"
 #chatglm配置
