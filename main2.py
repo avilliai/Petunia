@@ -281,11 +281,27 @@ def main(bot,logger):
                     logger.error(e)
                     logger.error("接口1绘画失败.......")
                     # await bot.send(event,"接口1绘画失败.......")
-                #print("hahahah")
+                i += 1
+            await bot.send(event, "接口绘画失败.......")
+
+    @bot.on(GroupMessage)
+    async def aidrawf1(event: GroupMessage):
+        if str(event.message_chain).startswith("画 "):
+            tag = str(event.message_chain).replace("画 ", "")
+            if os.path.exists("./data/pictures"):
+                pass
+            else:
+                os.mkdir("./data/pictures")
+            path = "data/pictures/" + random_str() + ".png"
+            logger.info("发起ai绘画请求，path:" + path + "|prompt:" + tag)
+            i = 1
+            while i < 10:
+                logger.info(f"第{i}次请求")
                 try:
                     logger.info("接口2绘画中......")
                     p = await drawe(tag, path)
                     await bot.send(event, Image(path=p), True)
+                    return
                 except Exception as e:
                     logger.error(e)
                     logger.error("接口2绘画失败.......")
