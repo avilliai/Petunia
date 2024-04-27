@@ -42,9 +42,6 @@ def cozeBotRep(url,text,proxy,channelid=None):
     }
 
     r = requests.post(url, headers=headers, json=data)
-    print(r)
-    print(r.text)
-    print(r)
     if r.status_code == 200:
         result = r.json()
         return result.get('choices')[0].get('message')
@@ -186,7 +183,61 @@ def gptUnofficial(prompt,apikeys,proxy,bot_info):
     )
     # print(chat_completion.choices[0].message.content)
     return {"role": "assistant", "content": chat_completion.choices[0].message.content}
+def kimi(prompt,bot_info):
+    prompt.insert(0, {"role": "user", "content": bot_info})
+    prompt.insert(1, {"role": "assistant", "content": "好的，已了解您的需求，我会根据您的需求扮演好您设定的角色。"})
+    prompt=str(prompt).replace("\"","%22").replace("\'","%22")
 
+    url = f"https://api.alcex.cn/API/ai/kimi.php?messages={prompt}"
+    #print(url)
+    r=requests.get(url).json()
+    return {"role": "assistant", "content": r["choices"][0]["message"]["content"]}
+def qingyan(prompt,bot_info):
+    prompt.insert(0, {"role": "user", "content": bot_info})
+    prompt.insert(1, {"role": "assistant", "content": "好的，已了解您的需求，我会根据您的需求扮演好您设定的角色。"})
+    prompt=str(prompt).replace("\"","%22").replace("\'","%22")
+
+    url = f"https://api.alcex.cn/API/chatglm/?messages={prompt}"
+    #print(url)
+    r=requests.get(url).json()
+    return {"role": "assistant", "content": r["choices"][0]["message"]["content"]}
+
+def lingyi(prompt,bot_info):
+    prompt.insert(0, {"role": "user", "content": bot_info})
+    prompt.insert(1, {"role": "assistant", "content": "好的，已了解您的需求，我会根据您的需求扮演好您设定的角色。"})
+    prompt=str(prompt).replace("\"","%22").replace("\'","%22")
+
+    url = f"https://api.alcex.cn/API/ai/zeroyi.php?messages={prompt}"
+    #print(url)
+    r=requests.get(url).json()
+    return {"role": "assistant", "content": r["choices"][0]["message"]["content"]}
+def stepAI(prompt,bot_info):
+    prompt.insert(0, {"role": "user", "content": bot_info})
+    prompt.insert(1, {"role": "assistant", "content": "好的，已了解您的需求，我会根据您的需求扮演好您设定的角色。"})
+    prompt=str(prompt).replace("\"","%22").replace("\'","%22")
+
+    url = f"https://api.alcex.cn/API/ai/step.php?messages={prompt}"
+    #print(url)
+    r=requests.get(url).json()
+    return {"role": "assistant", "content": r["choices"][0]["message"]["content"]}
+def qwen(prompt,bot_info):
+    prompt.insert(0, {"role": "user", "content": bot_info})
+    prompt.insert(1, {"role": "assistant", "content": "好的，已了解您的需求，我会根据您的需求扮演好您设定的角色。"})
+    prompt=str(prompt).replace("\"","%22").replace("\'","%22")
+
+    url = f"https://api.alcex.cn/API/ai/qwen.php?messages={prompt}"
+    #print(url)
+    r=requests.get(url).json()
+    return {"role": "assistant", "content": r["choices"][0]["message"]["content"]}
+def gptvvvv(prompt,bot_info):
+    prompt.insert(0, {"role": "user", "content": bot_info})
+    prompt.insert(1, {"role": "assistant", "content": "好的，已了解您的需求，我会根据您的需求扮演好您设定的角色。"})
+    prompt=str(prompt).replace("\"","%22").replace("\'","%22")
+
+    url = f"https://api.alcex.cn/API/gpt-4/v2.php?messages={prompt}&model=gpt-3.5-turbo"
+    #print(url)
+    r=requests.get(url).json()
+    return {"role": "assistant", "content": r["choices"][0]["message"]["content"]}
 async def drawe(prompt,path= "./test.png"):
     url=f"https://api.lolimi.cn/API/AI/sd.php?msg={prompt}&mode=动漫"
 
@@ -208,6 +259,13 @@ async def draw1(prompt,path="./test.png"):
             f.write(r1.content)
         # print(path)
         return path
+async def draw3(prompt,path="./test.png"):
+    url=f"https://api.alcex.cn/API/ai/novelai.php?tag={prompt}"
+    async with httpx.AsyncClient(timeout=40) as client:
+        r1 = await client.get(url)
+    with open(path, "wb") as f:
+        f.write(r1.content)
+    return path
 def main(bot,logger):
     with open('data/noRes.yaml', 'r', encoding='utf-8') as f:
         noRes1 = yaml.load(f.read(), Loader=yaml.FullLoader)
@@ -282,7 +340,7 @@ def main(bot,logger):
                     logger.error("接口1绘画失败.......")
                     # await bot.send(event,"接口1绘画失败.......")
                 i += 1
-            await bot.send(event, "接口绘画失败.......")
+            await bot.send(event, "接口1绘画失败.......")
 
     @bot.on(GroupMessage)
     async def aidrawf1(event: GroupMessage):
@@ -307,7 +365,32 @@ def main(bot,logger):
                     logger.error("接口2绘画失败.......")
                     # await bot.send(event,"接口2绘画失败.......")
                 i += 1
-            await bot.send(event, "接口绘画失败.......")
+            await bot.send(event, "接口2绘画失败.......")
+
+    @bot.on(GroupMessage)
+    async def aidrawf13(event: GroupMessage):
+        if str(event.message_chain).startswith("画 "):
+            tag = str(event.message_chain).replace("画 ", "")
+            if os.path.exists("./data/pictures"):
+                pass
+            else:
+                os.mkdir("./data/pictures")
+            path = "data/pictures/" + random_str() + ".png"
+            logger.info("发起ai绘画请求，path:" + path + "|prompt:" + tag)
+            i = 1
+            while i < 10:
+                logger.info(f"第{i}次请求")
+                try:
+                    logger.info("接口3绘画中......")
+                    p = await draw3(tag, path)
+                    await bot.send(event, Image(path=p), True)
+                    return
+                except Exception as e:
+                    logger.error(e)
+                    logger.error("接口3绘画失败.......")
+                    # await bot.send(event,"接口2绘画失败.......")
+                i += 1
+            await bot.send(event, "接口3绘画失败.......")
     # 用于chatGLM清除本地缓存
     @bot.on(GroupMessage)
     async def clearPrompt(event: GroupMessage):
@@ -382,17 +465,7 @@ def main(bot,logger):
         global chatGLMData, chatGLMCharacters,GeminiData,trustUser,trustGroups
         if At(bot.qq) in event.message_chain and (glmReply == True or (trustglmReply == True and str(event.sender.id) in trustUser) or event.group.id in trustGroups):
             if event.sender.id in chatGLMCharacters:
-                if chatGLMCharacters.get(event.sender.id) == "gpt3.5":
-
-                    rth = "gpt3.5"
-                    await modelReply(event, rth)
-                elif (chatGLMCharacters.get(event.sender.id) == "Cozi"):
-                    await modelReply(event, chatGLMCharacters.get(event.sender.id))
-                elif chatGLMCharacters.get(event.sender.id) == "lolimigpt":
-                    await modelReply(event, chatGLMCharacters.get(event.sender.id))
-                elif chatGLMCharacters.get(event.sender.id) == "glm-4":
-                    await modelReply(event, chatGLMCharacters.get(event.sender.id))
-                elif chatGLMCharacters.get(event.sender.id) == "Gemini":
+                if chatGLMCharacters.get(event.sender.id) == "Gemini":
                     text = str(event.message_chain).replace("@" + str(bot.qq) + "", '').replace(" ", "").replace("/g", "")
                     for saa in noRes:
                         if text == saa or text=="角色":
@@ -405,7 +478,6 @@ def main(bot,logger):
                                                                                                event.sender.member_name)
                     # 构建新的prompt
                     tep = {"role": "user", "parts": [text]}
-                    # print(type(tep))
                     # 获取以往的prompt
                     if event.sender.id in GeminiData and context == True:
                         prompt = GeminiData.get(event.sender.id)
@@ -445,7 +517,6 @@ def main(bot,logger):
                         text = "在吗"
                     # 构建新的prompt
                     tep = {"role": "user", "content": text}
-                    # print(type(tep))
                     # 获取以往的prompt
                     if event.sender.id in chatGLMData and context == True:
                         prompt = chatGLMData.get(event.sender.id)
@@ -493,18 +564,10 @@ def main(bot,logger):
 
                     except:
                         await bot.send(event, "chatGLM启动出错，请联系master\n或重试")
+                else:
+                    await modelReply(event, replyModel)
             # 判断模型
-            elif replyModel == "gpt3.5":
-
-                rth = "gpt3.5"
-                await modelReply(event, rth)
-            elif replyModel == "Cozi":
-                await modelReply(event, replyModel)
-            elif replyModel == "glm-4":
-                await modelReply(event, replyModel)
-            elif replyModel == "lolimigpt" :
-                await modelReply(event, replyModel)
-            elif replyModel == "Gemini" :
+            if replyModel == "Gemini" :
                 text = str(event.message_chain).replace("@" + str(bot.qq) + "", '').replace(" ", "").replace("/g", "")
                 for saa in noRes:
                     if text == saa or text=="角色":
@@ -517,7 +580,6 @@ def main(bot,logger):
                 tep = {"role": "user", "parts": [text]}
                 geminichar = allcharacters.get("Gemini").replace("【bot】", botName).replace("【用户】",
                                                                                            event.sender.member_name)
-                # print(type(tep))
                 # 获取以往的prompt
                 if event.sender.id in GeminiData and context == True:
                     prompt = GeminiData.get(event.sender.id)
@@ -561,7 +623,6 @@ def main(bot,logger):
                     text = "在吗"
                 # 构建新的prompt
                 tep = {"role": "user", "content": text}
-                # print(type(tep))
                 # 获取以往的prompt
                 if event.sender.id in chatGLMData and context == True:
                     prompt = chatGLMData.get(event.sender.id)
@@ -598,21 +659,14 @@ def main(bot,logger):
 
                 except:
                     await bot.send(event, "chatGLM启动出错，请联系master\n或重试")
+            else:
+                await modelReply(event, replyModel)
     @bot.on(FriendMessage)
     async def friendReply(event: FriendMessage):
         global chatGLMData, chatGLMCharacters, GeminiData, trustUser, trustGroups
         if (glmReply == True or (trustglmReply == True and str(event.sender.id) in trustUser) or friendRep==True):
             if event.sender.id in chatGLMCharacters:
-                if chatGLMCharacters.get(event.sender.id) == "gpt3.5":
-                    rth = "gpt3.5"
-                    await modelReply(event, rth)
-                elif (chatGLMCharacters.get(event.sender.id) == "Cozi"):
-                    await modelReply(event, chatGLMCharacters.get(event.sender.id))
-                elif chatGLMCharacters.get(event.sender.id) == "lolimigpt":
-                    await modelReply(event, chatGLMCharacters.get(event.sender.id))
-                elif chatGLMCharacters.get(event.sender.id) == "glm-4":
-                    await modelReply(event, chatGLMCharacters.get(event.sender.id))
-                elif chatGLMCharacters.get(event.sender.id) == "Gemini":
+                if chatGLMCharacters.get(event.sender.id) == "Gemini":
                     text = str(event.message_chain).replace("@" + str(bot.qq) + "", '').replace(" ", "").replace("/g",
                                                                                                                  "")
                     for saa in noRes:
@@ -626,7 +680,6 @@ def main(bot,logger):
                                                                                                event.sender.nickname)
                     # 构建新的prompt
                     tep = {"role": "user", "parts": [text]}
-                    # print(type(tep))
                     # 获取以往的prompt
                     if event.sender.id in GeminiData and context == True:
                         prompt = GeminiData.get(event.sender.id)
@@ -666,7 +719,6 @@ def main(bot,logger):
                         text = "在吗"
                     # 构建新的prompt
                     tep = {"role": "user", "content": text}
-                    # print(type(tep))
                     # 获取以往的prompt
                     if event.sender.id in chatGLMData and context == True:
                         prompt = chatGLMData.get(event.sender.id)
@@ -713,18 +765,10 @@ def main(bot,logger):
 
                     except:
                         await bot.send(event, "chatGLM启动出错，请联系master\n或重试")
+                else:
+                    await modelReply(event, chatGLMCharacters.get(event.sender.id))
             # 判断模型
-            elif replyModel == "gpt3.5":
-
-                rth = "gpt3.5"
-                await modelReply(event, rth)
-            elif replyModel == "Cozi":
-                await modelReply(event, replyModel)
-            elif replyModel == "glm-4":
-                await modelReply(event, replyModel)
-            elif replyModel == "lolimigpt":
-                await modelReply(event, replyModel)
-            elif replyModel == "Gemini":
+            if replyModel == "Gemini":
                 text = str(event.message_chain).replace("@" + str(bot.qq) + "", '').replace(" ", "").replace("/g", "")
                 for saa in noRes:
                     if text == saa or text == "角色":
@@ -737,7 +781,6 @@ def main(bot,logger):
                 tep = {"role": "user", "parts": [text]}
                 geminichar = allcharacters.get("Gemini").replace("【bot】", botName).replace("【用户】",
                                                                                            event.sender.nickname)
-                # print(type(tep))
                 # 获取以往的prompt
                 if event.sender.id in GeminiData and context == True:
                     prompt = GeminiData.get(event.sender.id)
@@ -781,7 +824,6 @@ def main(bot,logger):
                     text = "在吗"
                 # 构建新的prompt
                 tep = {"role": "user", "content": text}
-                # print(type(tep))
                 # 获取以往的prompt
                 if event.sender.id in chatGLMData and context == True:
                     prompt = chatGLMData.get(event.sender.id)
@@ -819,6 +861,8 @@ def main(bot,logger):
 
                 except:
                     await bot.send(event, "chatGLM启动出错，请联系master\n或重试")
+            else:
+                await modelReply(event, replyModel)
     @bot.on(GroupMessage)
     async def permitUserandGroup(event:GroupMessage):
         global trustUser, trustGroups
@@ -894,21 +938,12 @@ def main(bot,logger):
 
         if event.type != 'FriendMessage':
             bot_in = str(f"你是{botName},我是" + event.sender.member_name + "," + allcharacters.get(
-            "gpt3.5")).replace("【bot】",botName).replace("【用户】", event.sender.member_name)
-            lolimi_bot_in = str("你是" + botName + ",我是" + event.sender.member_name + "," + allcharacters.get(
-                "lolimigpt")).replace("【bot】",botName).replace("【用户】", event.sender.member_name)
-            glm4_bot_in = str("你是" + botName + ",我是" + event.sender.member_name + "," + allcharacters.get(
-                "glm-4")).replace("【bot】",botName).replace("【用户】", event.sender.member_name)
+            modelHere)).replace("【bot】",botName).replace("【用户】", event.sender.member_name)
         else:
             bot_in = str("你是" + botName + ",我是" + event.sender.nickname + "," + allcharacters.get(
-                "gpt3.5")).replace("【bot】",
+                modelHere)).replace("【bot】",
                                    botName).replace("【用户】", event.sender.nickname)
-            lolimi_bot_in = str("你是" + botName + ",我是" + event.sender.nickname + "," + allcharacters.get(
-                "lolimigpt")).replace("【bot】",
-                                      botName).replace("【用户】", event.sender.nickname)
-            glm4_bot_in = str("你是" + botName + ",我是" + event.sender.nickname + "," + allcharacters.get(
-                "glm-4")).replace("【bot】",
-                                      botName).replace("【用户】", event.sender.nickname)
+
         try:
             text = str(event.message_chain).replace("@" + str(bot.qq) + " ", '').replace("/gpt", "")
             if text == "" or text == " ":
@@ -933,8 +968,20 @@ def main(bot,logger):
                     rep = await loop.run_in_executor(None, gptUnofficial, prompt1, gptkeys, proxy, bot_in)
             elif modelHere=="Cozi":
                 rep = await loop.run_in_executor(None, cozeBotRep, CoziUrl, prompt1, proxy)
+            elif modelHere=="kimi":
+                rep = await loop.run_in_executor(None, kimi, prompt1, bot_in)
+            elif modelHere == "清言":
+                rep = await loop.run_in_executor(None, qingyan, prompt1, bot_in)
+            elif modelHere == "lingyi":
+                rep = await loop.run_in_executor(None, lingyi, prompt1, bot_in)
+            elif modelHere == "step":
+                rep = await loop.run_in_executor(None, stepAI, prompt1, bot_in)
+            elif modelHere == "通义千问":
+                rep = await loop.run_in_executor(None, qwen, prompt1, bot_in)
+            elif modelHere == "gptX":
+                rep = await loop.run_in_executor(None, gptvvvv, prompt1, bot_in)
             elif modelHere=="lolimigpt":
-                rep = await lolimigpt2(prompt1,lolimi_bot_in)
+                rep = await lolimigpt2(prompt1,bot_in)
                 if "令牌额度" in rep.get("content"):
                     logger.error("没金币了喵")
                     await bot.send(event, "api没金币了喵\n请发送 @bot 可用角色模板 以更换其他模型", True)
@@ -949,7 +996,7 @@ def main(bot,logger):
                     return
 
             elif modelHere=="glm-4":
-                rep=await glm4(prompt1,glm4_bot_in)
+                rep=await glm4(prompt1,bot_in)
                 if "禁止违规问答" == rep.get("content"):
                     logger.error("敏感喽，不能用了")
                     await bot.send(event,rep.get("content"))
