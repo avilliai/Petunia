@@ -87,13 +87,26 @@ def random_str(random_length=6,chars='AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUu
     return string
 async def lolimigpt2(prompt,meta):
     url="https://api.lolimi.cn/API/AI/c.php?"
+
     prompt.insert(0,{"role":"user","content":meta})
-    prompt.insert(1, {"role": "assistant", "content": "好的，已了解您的需求~我会扮演好您设定的角色"})
+    prompt.insert(1, {"role": "assistant", "content": "好的，已了解您的需求~我会扮演好您设定的角色。"})
     async with httpx.AsyncClient(timeout=200) as client:
         r = await client.post(url=url,json=prompt)
         return {"role":"assistant","content":r.text}
 
-
+def relolimigpt2(fuckprompt,meta):
+    url = "https://api.lolimi.cn/API/AI/c.php?"
+    fuckprompt.insert(0, {"role": "user", "content": meta})
+    fuckprompt.insert(1, {"role": "assistant", "content": "好的，已了解您的需求~我会扮演好您设定的角色。"})
+    r = requests.post(url=url, json=fuckprompt)
+    return {"role": "assistant", "content": r.text}
+def gpt4hahaha(prompt,meta):
+    prompt.insert(0, {"role": "user", "content": meta})
+    prompt.insert(1, {"role": "assistant", "content": "好的，已了解您的需求~我会扮演好您设定的角色。"})
+    prompt = str(prompt).replace("\"", "%22").replace("\'", "%22")
+    url=f"https://api.alcex.cn/API/gpt-4/v2.php?messages={prompt}"
+    r = requests.get(url).json()
+    return {"role": "assistant", "content": r["choices"][0]["message"]["content"]}
 async def geminirep(ak, messages):
     # Or use `os.getenv('GOOGLE_API_KEY')` to fetch an environment variable.
     GOOGLE_API_KEY = ak
@@ -143,6 +156,13 @@ async def geminirep(ak, messages):
 
     # print(response.text)
     return response.text
+def grop(prompt,bot_info):
+    prompt.insert(0, {"role": "user", "content": bot_info})
+    prompt.insert(1, {"role": "assistant", "content": "好的，已了解您的需求~我会扮演好您设定的角色。"})
+    prompt = str(prompt).replace("\"", "%22").replace("\'", "%22")
+    url=f"https://api.alcex.cn/API/ai/grop.php?messages={prompt}"
+    r=requests.get(url).json()
+    return {"role": "assistant", "content": r["choices"][0]["message"]["content"]}
 async def glm4(prompt,meta):
     prompt.insert(0,{"role":"user","content":meta})
     prompt.insert(1, {"role": "assistant", "content": "好的~"})
@@ -185,7 +205,7 @@ def gptUnofficial(prompt,apikeys,proxy,bot_info):
     return {"role": "assistant", "content": chat_completion.choices[0].message.content}
 def kimi(prompt,bot_info):
     prompt.insert(0, {"role": "user", "content": bot_info})
-    prompt.insert(1, {"role": "assistant", "content": "好的，已了解您的需求，我会根据您的需求扮演好您设定的角色。"})
+    prompt.insert(1, {"role": "assistant", "content": "好的，已了解您的需求~我会扮演好您设定的角色。"})
     prompt=str(prompt).replace("\"","%22").replace("\'","%22")
 
     url = f"https://api.alcex.cn/API/ai/kimi.php?messages={prompt}"
@@ -194,7 +214,7 @@ def kimi(prompt,bot_info):
     return {"role": "assistant", "content": r["choices"][0]["message"]["content"]}
 def qingyan(prompt,bot_info):
     prompt.insert(0, {"role": "user", "content": bot_info})
-    prompt.insert(1, {"role": "assistant", "content": "好的，已了解您的需求，我会根据您的需求扮演好您设定的角色。"})
+    prompt.insert(1, {"role": "assistant", "content": "好的，已了解您的需求~我会扮演好您设定的角色。"})
     prompt=str(prompt).replace("\"","%22").replace("\'","%22")
 
     url = f"https://api.alcex.cn/API/chatglm/?messages={prompt}"
@@ -204,7 +224,7 @@ def qingyan(prompt,bot_info):
 
 def lingyi(prompt,bot_info):
     prompt.insert(0, {"role": "user", "content": bot_info})
-    prompt.insert(1, {"role": "assistant", "content": "好的，已了解您的需求，我会根据您的需求扮演好您设定的角色。"})
+    prompt.insert(1, {"role": "assistant", "content": "好的，已了解您的需求~我会扮演好您设定的角色。"})
     prompt=str(prompt).replace("\"","%22").replace("\'","%22")
 
     url = f"https://api.alcex.cn/API/ai/zeroyi.php?messages={prompt}"
@@ -213,7 +233,7 @@ def lingyi(prompt,bot_info):
     return {"role": "assistant", "content": r["choices"][0]["message"]["content"]}
 def stepAI(prompt,bot_info):
     prompt.insert(0, {"role": "user", "content": bot_info})
-    prompt.insert(1, {"role": "assistant", "content": "好的，已了解您的需求，我会根据您的需求扮演好您设定的角色。"})
+    prompt.insert(1, {"role": "assistant", "content": "好的，已了解您的需求~我会扮演好您设定的角色。"})
     prompt=str(prompt).replace("\"","%22").replace("\'","%22")
 
     url = f"https://api.alcex.cn/API/ai/step.php?messages={prompt}"
@@ -222,7 +242,7 @@ def stepAI(prompt,bot_info):
     return {"role": "assistant", "content": r["choices"][0]["message"]["content"]}
 def qwen(prompt,bot_info):
     prompt.insert(0, {"role": "user", "content": bot_info})
-    prompt.insert(1, {"role": "assistant", "content": "好的，已了解您的需求，我会根据您的需求扮演好您设定的角色。"})
+    prompt.insert(1, {"role": "assistant", "content": "好的，已了解您的需求~我会扮演好您设定的角色。"})
     prompt=str(prompt).replace("\"","%22").replace("\'","%22")
 
     url = f"https://api.alcex.cn/API/ai/qwen.php?messages={prompt}"
@@ -231,7 +251,7 @@ def qwen(prompt,bot_info):
     return {"role": "assistant", "content": r["choices"][0]["message"]["content"]}
 def gptvvvv(prompt,bot_info):
     prompt.insert(0, {"role": "user", "content": bot_info})
-    prompt.insert(1, {"role": "assistant", "content": "好的，已了解您的需求，我会根据您的需求扮演好您设定的角色。"})
+    prompt.insert(1, {"role": "assistant", "content": "好的，已了解您的需求~我会扮演好您设定的角色。"})
     prompt=str(prompt).replace("\"","%22").replace("\'","%22")
 
     url = f"https://api.alcex.cn/API/gpt-4/v2.php?messages={prompt}&model=gpt-3.5-turbo"
@@ -486,7 +506,7 @@ def main(bot,logger):
                     else:
                         await bot.send(event, "即将开始对话，请注意，如果遇到对话异常，请发送 /clear 以清理对话记录(不用艾特)", True)
                         prompt = [{"role": "user", "parts": [geminichar]},
-                                  {"role": 'model', "parts": ["好的，已了解您的需求，我会扮演好你设定的角色"]}]
+                                  {"role": 'model', "parts": ["好的，已了解您的需求~我会扮演好您设定的角色。"]}]
                         prompt.append(tep)
                     logger.info("gemini接收提问:" + text)
                     try:
@@ -588,7 +608,7 @@ def main(bot,logger):
                 else:
                     await bot.send(event, "即将开始对话，请注意，如果遇到对话异常，请发送 /clear 以清理对话记录(不用艾特)", True)
                     prompt = [{"role": "user", "parts": [geminichar]},
-                              {"role": 'model', "parts": ["好的，已了解您的需求，我会扮演好你设定的角色"]}]
+                              {"role": 'model', "parts": ["好的，已了解您的需求~我会扮演好您设定的角色。"]}]
                     prompt.append(tep)
                 logger.info("gemini接收提问:" + text)
                 try:
@@ -688,7 +708,7 @@ def main(bot,logger):
                     else:
                         await bot.send(event, "即将开始对话，请注意，如果遇到对话异常，请发送 /clear 以清理对话记录(不用艾特)", True)
                         prompt = [{"role": "user", "parts": [geminichar]},
-                                  {"role": 'model', "parts": ["好的，已了解您的需求，我会扮演好你设定的角色"]}]
+                                  {"role": 'model', "parts": ["好的，已了解您的需求~我会扮演好您设定的角色。"]}]
                         prompt.append(tep)
                     logger.info("gemini接收提问:" + text)
                     try:
@@ -789,7 +809,7 @@ def main(bot,logger):
                 else:
                     await bot.send(event, "即将开始对话，请注意，如果遇到对话异常，请发送 /clear 以清理对话记录(不用艾特)", True)
                     prompt = [{"role": "user", "parts": [geminichar]},
-                              {"role": 'model', "parts": ["好的，已了解您的需求，我会扮演好你设定的角色"]}]
+                              {"role": 'model', "parts": ["好的，已了解您的需求~我会扮演好您设定的角色。"]}]
                     prompt.append(tep)
                 logger.info("gemini接收提问:" + text)
                 try:
@@ -933,6 +953,14 @@ def main(bot,logger):
 
         else:
             await bot.send(event, r, True)
+    async def loop_run_in_executor(executor, func, *args):
+        try:
+            r=await executor.run_in_executor(None, func, *args)
+            logger.info(f"successfully running {func.__name__}:{r.get('content')}")
+            return r
+        except Exception as e:
+            #logger.error(f"Error running {func.__name__}: {e}")
+            return None
     async def modelReply(event,modelHere):
         global chatGLMData, chatGLMCharacters,GeminiData
 
@@ -961,14 +989,61 @@ def main(bot,logger):
                 await bot.send(event, "即将开始对话，如果遇到异常请发送 /clear 清理对话")
             logger.info(f"{modelHere}  bot 接受提问：" + text)
             loop = asyncio.get_event_loop()
-            if modelHere=="gpt3.5":
-                if gptdev==False:
-                    rep = await loop.run_in_executor(None, gptOfficial, prompt1, gptkeys, proxy, bot_in)
-                else:
+            if modelHere == "random":
+                tasks = []
+                logger.warning("请求所有模型接口")
+                #print(f"0哈哈哈:{prompt1}")
+                # 将所有模型的执行代码包装成异步任务，并添加到任务列表
+                # tasks.append(loop_run_in_executor(loop, gptUnofficial if gptdev else gptOfficial, prompt1, gptkeys, proxy,bot_in))
+                tasks.append(loop_run_in_executor(loop, cozeBotRep, CoziUrl, prompt1, proxy))
+                tasks.append(loop_run_in_executor(loop, kimi, prompt1, bot_in))
+                tasks.append(loop_run_in_executor(loop, qingyan, prompt1, bot_in))
+                tasks.append(loop_run_in_executor(loop, grop, prompt1, bot_in))
+                tasks.append(loop_run_in_executor(loop, lingyi, prompt1, bot_in))
+                tasks.append(loop_run_in_executor(loop, relolimigpt2, prompt1, bot_in))
+                tasks.append(loop_run_in_executor(loop, stepAI, prompt1, bot_in))
+                tasks.append(loop_run_in_executor(loop, qwen, prompt1, bot_in))
+                tasks.append(loop_run_in_executor(loop, gptvvvv, prompt1, bot_in))
+                tasks.append(loop_run_in_executor(loop, gpt4hahaha, prompt1, bot_in))
+                #tasks.append(loop_run_in_executor(loop,localAurona,prompt1,bot_in))
+                # ... 添加其他模型的任务 ...
+                done, pending = await asyncio.wait(tasks, return_when=asyncio.ALL_COMPLETED)
+                #莫名其妙真的是
+                aim = {"role": "user", "content": bot_in}
+                prompt1 = [i for i in prompt1 if i != aim]
+                aim={"role": "assistant", "content": "好的，已了解您的需求~我会扮演好您设定的角色。"}
+                prompt1 = [i for i in prompt1 if i != aim]
+                #print(f"1哈哈哈：{prompt1}")
+
+                reps = []
+                # 等待所有任务完成
+                rep = None
+                for task in done:
+                    result = task.result()
+
+                    if result is not None:
+                        if "content" not in result:
+                            continue
+                        if "我不能继续" in result.get("content") or "无法解析" in result.get("content") or "账户余额不足" in result.get("content") or "令牌额度" in result.get(
+                                "content") or "敏感词汇" in result.get("content") or "request id" in result.get(
+                                "content") or "This model's maximum" in result.get(
+                                "content") or "solve CAPTCHA to" in result.get("content"):
+                            continue
+                        reps.append(result)  # 添加可用结果
+                #print(f"1。5哈哈哈：{prompt1}")
+                # 如果所有任务都完成但没有找到非None的结果
+                if len(reps) == 0:
+                    logger.warning("所有模型都未能返回有效回复")
+                    raise Exception
+                rep = random.choice(reps)
+            elif modelHere == "gpt3.5":
+                if gptdev == True:
                     rep = await loop.run_in_executor(None, gptUnofficial, prompt1, gptkeys, proxy, bot_in)
-            elif modelHere=="Cozi":
+                else:
+                    rep = await loop.run_in_executor(None, gptOfficial, prompt1, gptkeys, proxy, bot_in)
+            elif modelHere == "Cozi":
                 rep = await loop.run_in_executor(None, cozeBotRep, CoziUrl, prompt1, proxy)
-            elif modelHere=="kimi":
+            elif modelHere == "kimi":
                 rep = await loop.run_in_executor(None, kimi, prompt1, bot_in)
             elif modelHere == "清言":
                 rep = await loop.run_in_executor(None, qingyan, prompt1, bot_in)
@@ -980,6 +1055,8 @@ def main(bot,logger):
                 rep = await loop.run_in_executor(None, qwen, prompt1, bot_in)
             elif modelHere == "gptX":
                 rep = await loop.run_in_executor(None, gptvvvv, prompt1, bot_in)
+            elif modelHere == "grop":
+                rep = await loop.run_in_executor(None, grop, prompt1, bot_in)
             elif modelHere=="lolimigpt":
                 rep = await lolimigpt2(prompt1,bot_in)
                 if "令牌额度" in rep.get("content"):
@@ -1006,7 +1083,10 @@ def main(bot,logger):
                     except Exception as e:
                         logger.error(e)
                     return
+            #print(f"2哈哈哈：{prompt1}")
+            #logger.info(rep)
             prompt1.append(rep)
+            #logger.info(prompt1)
             # 超过10，移除第一个元素
 
             if len(prompt1) > maxPrompt:
