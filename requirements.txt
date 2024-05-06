@@ -1,0 +1,8 @@
+httpx~=0.25.2
+requests~=2.31.0
+zhipuai~=1.0.7
+colorlog~=6.8.0
+PyYAML~=6.0.1
+openai~=1.14.3
+yiri-mirai
+google-generativeai
