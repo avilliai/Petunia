@@ -1,0 +1,4 @@
+sock5-proxy: ""                  #sock5代理，如使用bing-imagecreator必须配置，取决于你自己代理的端口。
+bing-image-creator:              #bing的ai绘画，参考https://github.com/avilliai/Manyana/issues/8
+  _U: ""
+  KievRPSSecAuth: ""
