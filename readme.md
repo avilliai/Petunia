@@ -73,6 +73,29 @@ chatGLM:
   speaker: 东雪莲          #语音合成默认音源，根据你的合成模式设定。outVits模式的角色(个人推荐填 瑶瑶)看https://api.lolimi.cn/?action=doc&id=181
   ......(后略)
 ```
+# 配置bing-image-creator
+# 获取_U和KievRPSSecAuth
+首先，打开代理，打开[bing-image-creator](https://www.bing.com/images/create)
+
+登录
+
+按下F12
+
+![2e01ce63b247e11851159559f2e1815e](https://github.com/avilliai/Manyana/assets/99066610/1a20b211-85c2-44d1-b11e-9c811f2c55d8)
+
+![233f35e8cf73672797f81ef030fa26fe](https://github.com/avilliai/Manyana/assets/99066610/acd7ba93-b62c-45ba-9a14-6dd13e01f70d)
+
+将_U和KievRPSSecAuth两个参数填入bing_dalle3_config.yaml
+# 配置sock5-proxy
+以我使用的v2ray来说，socks端口是10808(如下图)
+![image](https://github.com/avilliai/Manyana/assets/99066610/9440dc7d-83ee-4695-80ac-6bca774e3af6)
+
+故我在bing_dalle3_config.yaml中的sock5-proxy填写为"socks5://127.0.0.1:10808"
+
+这取决于你自己代理的socks端口配置，并不统一，但都能找到，耐心一点。
+
+启动bing_image_creator.exe即可
+
 # 🎲可用指令
 ```
 授权#qq号     #给特定用户授权
