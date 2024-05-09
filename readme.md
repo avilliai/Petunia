@@ -74,7 +74,7 @@ chatGLM:
   ......(后略)
 ```
 # 配置bing-image-creator
-# 获取_U和KievRPSSecAuth
+### 获取_U和KievRPSSecAuth
 首先，打开代理，打开[bing-image-creator](https://www.bing.com/images/create)
 
 登录
@@ -86,7 +86,7 @@ chatGLM:
 ![233f35e8cf73672797f81ef030fa26fe](https://github.com/avilliai/Manyana/assets/99066610/acd7ba93-b62c-45ba-9a14-6dd13e01f70d)
 
 将_U和KievRPSSecAuth两个参数填入bing_dalle3_config.yaml
-# 配置sock5-proxy
+### 配置sock5-proxy
 以我使用的v2ray来说，socks端口是10808(如下图)
 ![image](https://github.com/avilliai/Manyana/assets/99066610/9440dc7d-83ee-4695-80ac-6bca774e3af6)
 
