@@ -73,7 +73,8 @@ chatGLM:
   speaker: 东雪莲          #语音合成默认音源，根据你的合成模式设定。outVits模式的角色(个人推荐填 瑶瑶)看https://api.lolimi.cn/?action=doc&id=181
   ......(后略)
 ```
-
+## bing_image_creator配置
+https://github.com/avilliai/Petunia/issues/5
 
 # 🎲可用指令
 ```
