@@ -27,6 +27,8 @@ bot:
   botname: yucca               #机器人的名字
 ```
 ## 选择模型
+**如果你只想用不需要代理、免费、不用配置的模型，那不用看下面这一堆了，默认的random几乎包含所有免费模型。**
+
 模型可选lolimigpt(免费无需key，不稳定)/glm-4(免费无需key，不稳定)/Gemini(免费需代理，配置geminiapiKey)/Cozi(免费需代理，配置CoziUrl)/characterglm(付费，配置chatGLMKey)/gpt3.5(付费，配置openaikeys)<br>
 
 
