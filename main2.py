@@ -4,6 +4,7 @@ import os
 import random
 import re
 import threading
+import time
 
 import colorlog
 import httpx
@@ -1393,8 +1394,15 @@ if __name__ == '__main__':
     logger.info("项目源地址：https://github.com/avilliai/Bergml")
     logger.info("此项目拆分自Manyana：https://github.com/avilliai/Manyana")
     main(bot,logger)
-    try:
-        bot.run()
-    except Exception as e:
-        logger.error(e)
-        logger.error("出错，检查Mirai是否正常启动，以及settings.yaml中的配置是否正确")
+    while 1:
+        try:
+            bot.run()
+        except Exception as e:
+            logger.error(e)
+            logger.error("出错，检查Mirai是否正常启动，以及settings.yaml中的配置是否正确")
+            logger.info(f"等待5秒后重新尝试，ctrl+c打断")
+            t = 5
+            while t:  
+                logger.info(t)
+                time.sleep(1)  
+                t -= 1  
