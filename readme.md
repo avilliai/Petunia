@@ -21,7 +21,7 @@
 ```
 bot:
   http-api-key: '1234567890'   #mirai-api-http的vertify key
-  http-api-port: 23456         #mirai-api-http的port
+  http-api-port: 23456         #mirai-api-http的port，注意，这里是ws，而不是http
   botqq: 919467430             #机器人的qq
   master: 1840094972           #你的qq
   botname: yucca               #机器人的名字
