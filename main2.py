@@ -23,6 +23,11 @@ class CListen(threading.Thread):
         asyncio.set_event_loop(self.mLoop)  # 在新线程中开启一个事件循环
 
         self.mLoop.run_forever()
+def anotherGPT35(prompt,id):
+    prompt=prompt[-1]["content"]
+    url=f"https://api.shenke.love/api/ChatGPT.php?msg={prompt}&id={id}"
+    r = requests.get(url).json()["data"]["message"]
+    return {"role": "assistant", "content": r}
 async def translate(text,mode="ZH_CN2JA"):
     URL=f"https://api.pearktrue.cn/api/translate/?text={text}&type={mode}"
     async with httpx.AsyncClient(timeout=20) as client:
@@ -304,6 +309,7 @@ def main(bot,logger):
     voiceRate = result.get("chatGLM").get("voiceRate")
     speaker = result.get("chatGLM").get("speaker")
     friendRep=result.get("chatGLM").get("friendRep")
+    randomModelPriority = result.get("chatGLM").get("random&PriorityModel")
     withText=result.get("chatGLM").get("withText")
     chatGLM_api_key=result.get("apiKeys").get("chatGLMKey")
     geminiapikey=result.get("apiKeys").get('geminiapiKey')
@@ -953,14 +959,16 @@ def main(bot,logger):
 
         else:
             await bot.send(event, r, True)
+
     async def loop_run_in_executor(executor, func, *args):
         try:
-            r=await executor.run_in_executor(None, func, *args)
-            logger.info(f"successfully running {func.__name__}:{r.get('content')}")
-            return r
+            r = await executor.run_in_executor(None, func, *args)
+            logger.info(f"并发调用 | successfully running funcname：{func.__name__} result：{r.get('content')}")
+            return [str(func.__name__), r]
         except Exception as e:
-            #logger.error(f"Error running {func.__name__}: {e}")
-            return None
+            # logger.error(f"Error running {func.__name__}: {e}")
+            return [str(func.__name__), None]
+
     async def modelReply(event,modelHere):
         global chatGLMData, chatGLMCharacters,GeminiData
 
@@ -973,6 +981,7 @@ def main(bot,logger):
                                    botName).replace("【用户】", event.sender.nickname)
 
         try:
+            loop = asyncio.get_event_loop()
             text = str(event.message_chain).replace("@" + str(bot.qq) + " ", '').replace("/gpt", "")
             if text == "" or text == " ":
                 text = "在吗"
@@ -987,8 +996,11 @@ def main(bot,logger):
             else:
                 prompt1 = [{"content": text, "role": "user"}]
                 await bot.send(event, "即将开始对话，如果遇到异常请发送 /clear 清理对话")
+                if modelHere=="anotherGPT3.5" or modelHere=="random":
+                    rep=await loop.run_in_executor(None,anotherGPT35,[{"role": "user", "content": bot_in}],event.sender.id)
+                    await bot.send(event,"初始化角色完成")
             logger.info(f"{modelHere}  bot 接受提问：" + text)
-            loop = asyncio.get_event_loop()
+
             if modelHere == "random":
                 tasks = []
                 logger.warning("请求所有模型接口")
@@ -1005,37 +1017,47 @@ def main(bot,logger):
                 tasks.append(loop_run_in_executor(loop, qwen, prompt1, bot_in))
                 tasks.append(loop_run_in_executor(loop, gptvvvv, prompt1, bot_in))
                 tasks.append(loop_run_in_executor(loop, gpt4hahaha, prompt1, bot_in))
+                tasks.append(loop_run_in_executor(loop, anotherGPT35, prompt1, event.sender.id))
                 #tasks.append(loop_run_in_executor(loop,localAurona,prompt1,bot_in))
                 # ... 添加其他模型的任务 ...
-                done, pending = await asyncio.wait(tasks, return_when=asyncio.ALL_COMPLETED)
                 #莫名其妙真的是
                 aim = {"role": "user", "content": bot_in}
                 prompt1 = [i for i in prompt1 if i != aim]
-                aim={"role": "assistant", "content": "好的，已了解您的需求~我会扮演好您设定的角色。"}
+                aim = {"role": "assistant", "content": "好的，已了解您的需求~我会扮演好您设定的角色。"}
                 prompt1 = [i for i in prompt1 if i != aim]
-                #print(f"1哈哈哈：{prompt1}")
 
-                reps = []
+                done, pending = await asyncio.wait(tasks, return_when=asyncio.ALL_COMPLETED)
+                reps = {}
                 # 等待所有任务完成
                 rep = None
                 for task in done:
-                    result = task.result()
-
+                    result = task.result()[1]
                     if result is not None:
                         if "content" not in result:
                             continue
-                        if "我不能继续" in result.get("content") or "无法解析" in result.get("content") or "账户余额不足" in result.get("content") or "令牌额度" in result.get(
+                        if "无法解析" in result.get("content") or "账户余额不足" in result.get("content") or "令牌额度" in result.get(
                                 "content") or "敏感词汇" in result.get("content") or "request id" in result.get(
-                                "content") or "This model's maximum" in result.get(
-                                "content") or "solve CAPTCHA to" in result.get("content"):
+                            "content") or "This model's maximum" in result.get(
+                            "content") or "solve CAPTCHA to" in result.get("content") or "输出错误请联系站长" in result.get(
+                            "content") or "接口失败" in result.get("content"):
                             continue
-                        reps.append(result)  # 添加可用结果
-                #print(f"1。5哈哈哈：{prompt1}")
+                        reps[task.result()[0]] = task.result()[1]
+                        # reps.append(task.result())  # 添加可用结果
+
                 # 如果所有任务都完成但没有找到非None的结果
                 if len(reps) == 0:
                     logger.warning("所有模型都未能返回有效回复")
                     raise Exception
-                rep = random.choice(reps)
+                # print(reps)
+                modeltrans = {"gptX": "gptvvvv", "清言": "qingyan", "通义千问": "qwen", "anotherGPT3.5": "anotherGPT35",
+                              "lolimigpt": "relolimigpt2", "step": "stepAI"}
+                for priority in randomModelPriority:
+                    if priority in modeltrans:
+                        priority = modeltrans.get(priority)
+                    if priority in reps:
+                        rep = reps.get(priority)
+                        logger.info(f"random模型选择结果：{priority}: {rep}")
+                        break
             elif modelHere == "gpt3.5":
                 if gptdev == True:
                     rep = await loop.run_in_executor(None, gptUnofficial, prompt1, gptkeys, proxy, bot_in)
@@ -1043,6 +1065,8 @@ def main(bot,logger):
                     rep = await loop.run_in_executor(None, gptOfficial, prompt1, gptkeys, proxy, bot_in)
             elif modelHere == "Cozi":
                 rep = await loop.run_in_executor(None, cozeBotRep, CoziUrl, prompt1, proxy)
+            elif modelHere=="anotherGPT3.5":
+                rep=await loop.run_in_executor(None,anotherGPT35,prompt1,event.sender.id)
             elif modelHere == "kimi":
                 rep = await loop.run_in_executor(None, kimi, prompt1, bot_in)
             elif modelHere == "清言":
@@ -1373,4 +1397,4 @@ if __name__ == '__main__':
         bot.run()
     except Exception as e:
         logger.error(e)
-        input("出错，按任意键退出")
+        logger.error("出错，检查Mirai是否正常启动，以及settings.yaml中的配置是否正确")
