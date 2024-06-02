@@ -938,7 +938,7 @@ def main(bot,logger):
             logger.info("查询可用角色模板")
             await bot.send(event,Image(url="https://img2.imgtp.com/2024/04/20/MvtwZXqt.jpg"))
     async def tstt(r, event):
-        if len(r) < maxTextLen and random.randint(0, 100) < voiceRate and event.type != 'FriendMessage':
+        if len(r) < maxTextLen and random.randint(0, 100) < voiceRate:
             data1 = {}
             data1['speaker'] = speaker
 
@@ -971,14 +971,19 @@ def main(bot,logger):
 
     async def modelReply(event,modelHere):
         global chatGLMData, chatGLMCharacters,GeminiData
-
-        if event.type != 'FriendMessage':
-            bot_in = str(f"你是{botName},我是" + event.sender.member_name + "," + allcharacters.get(
-            modelHere)).replace("【bot】",botName).replace("【用户】", event.sender.member_name)
-        else:
+        try:
+            if event.type != 'FriendMessage':
+                bot_in = str(f"你是{botName},我是" + event.sender.member_name + "," + allcharacters.get(
+                modelHere)).replace("【bot】",botName).replace("【用户】", event.sender.member_name)
+            else:
+                bot_in = str("你是" + botName + ",我是" + event.sender.nickname + "," + allcharacters.get(
+                    modelHere)).replace("【bot】",
+                                       botName).replace("【用户】", event.sender.nickname)
+        except:
+            logger.error("获取用户名失败，使用nickname")
             bot_in = str("你是" + botName + ",我是" + event.sender.nickname + "," + allcharacters.get(
                 modelHere)).replace("【bot】",
-                                   botName).replace("【用户】", event.sender.nickname)
+                                    botName).replace("【用户】", event.sender.nickname)
 
         try:
             loop = asyncio.get_event_loop()
@@ -1122,10 +1127,9 @@ def main(bot,logger):
             with open('data/chatGLMData.yaml', 'w', encoding="utf-8") as file:
                 yaml.dump(chatGLMData, file, allow_unicode=True)
             logger.info(f"{modelHere} bot 回复：" + rep.get('content'))
-            if event.type != 'FriendMessage':
-                await tstt(rep.get('content'), event)
-            else:
-                await bot.send_friend_message(event.sender.id,rep.get('content'))
+
+            await tstt(rep.get('content'), event)
+
         except Exception as e:
             logger.error(e)
             try:
@@ -1329,7 +1333,7 @@ def main(bot,logger):
         # print(result)
         st11 = st1.replace(setName, "指挥")
         logger.info("chatGLM:" + st1)
-        if len(st1) < maxTextLen and random.randint(0, 100) < voiceRate and event.type != 'FriendMessage':
+        if len(st1) < maxTextLen and random.randint(0, 100) < voiceRate:
             data1 = {}
             data1['speaker'] = speaker
 
