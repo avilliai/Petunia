@@ -8,9 +8,10 @@
 # 🚀部署
 从[release下载](https://github.com/avilliai/Bergml/releases) 最新的压缩包<br>
 解压<br>
-填写Petunia/settings.yaml<br>
-双击main2.exe
-# ☁如何填写Petunia/settings.yaml
+双击启动器.exe
+填写bot设置(实际上就是settings.yaml，不过显示在UI中更方便操作)<br>
+
+# ☁如何填写bot设置页面（Petunia/settings.yaml）
 >settings.yaml配置文件的每一个可配置项基本都有注释
 
 这里是十分重要的一部分<br>
