@@ -1296,7 +1296,7 @@ def main(bot,logger):
                                 "content") or "敏感词汇" in result.get("content") or "request id" in result.get(
                             "content") or "This model's maximum" in result.get(
                             "content") or "solve CAPTCHA to" in result.get("content") or "输出错误请联系站长" in result.get(
-                            "content") or "接口失败" in result.get("content") or "响应错误" in result.get("content"):
+                            "content") or "接口失败" in result.get("content") or "ip请求过多" in result.get("content"):
                             continue
                         reps[task.result()[0]] = task.result()[1]
                         # reps.append(task.result())  # 添加可用结果
