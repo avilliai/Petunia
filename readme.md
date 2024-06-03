@@ -68,12 +68,12 @@ proxy: "http://127.0.0.1:10809"             #代理，如果是clash，一般填
 chatGLM:
   ......(前略)
   #语音合成配置部分
-  voiceGenerateSource: modelscopeTTS  #可选modelscopeTTS和outVits
+  voiceGenerateSource: modelscopeTTS  #可选modelscopeTTS和firefly
   maxLen: 70    #语音合成最大长度限制，超出则返回文本。
   voiceRate: 100 #语音回复几率,为0则不开启
   langType: "<zh>"  #语音合成语言类型，仅对modelscopeTTS部分角色生效
   #modelscopeTTS模式可用角色["BT","塔菲","阿梓","otto","丁真","星瞳","东雪莲","嘉然","孙笑川","亚托克斯","文静","鹿鸣","奶绿","七海","恬豆","科比"]，该模式下任选其一填入即可
-  speaker: 东雪莲          #语音合成默认音源，根据你的合成模式设定。outVits模式的角色(个人推荐填 瑶瑶)看https://api.lolimi.cn/?action=doc&id=181
+  speaker: 东雪莲          #语音合成默认音源，根据你的合成模式设定。firefly模式详见 speaker.txt（太多了）
   ......(后略)
 ```
 ## bing_image_creator配置
