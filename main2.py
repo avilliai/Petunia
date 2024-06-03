@@ -1171,18 +1171,37 @@ def main(bot,logger):
                     await bot.send(event, Voice(path=p))
                 except:
                     pass
-            if str(event.message_chain).split("说")[0]+"_ZH" in fireflySpeaker:
-                p = await superVG({"text": txt, "speaker": str(event.message_chain).split("说")[0]+"_ZH"},"firefly")
-                await bot.send(event, Voice(path=p))
-            elif str(event.message_chain).split("说")[0]+"_JP" in fireflySpeaker:
-                p = await superVG({"text": txt, "speaker": str(event.message_chain).split("说")[0]+"_JP"},"firefly")
-                await bot.send(event, Voice(path=p))
-            elif str(event.message_chain).split("说")[0]+"_EN" in fireflySpeaker:
-                p = await superVG({"text": txt, "speaker": str(event.message_chain).split("说")[0]+"_EN"},"firefly")
-                await bot.send(event, Voice(path=p))
-            elif str(event.message_chain).split("说")[0] in fireflySpeaker:
-                p = await superVG(data={"text": txt, "speaker": str(event.message_chain).split("说")[0]},mode="firefly",langmode="<jp>")
-                await bot.send(event, Voice(path=p))
+            ib = 0
+            while ib < 7:
+                try:
+                    if str(event.message_chain).split("说")[0] + "_ZH" in fireflySpeaker:
+                        p = await superVG({"text": txt, "speaker": str(event.message_chain).split("说")[0] + "_ZH"},
+                                          "firefly")
+                        await bot.send(event, Voice(path=p))
+                        return
+                    elif str(event.message_chain).split("说")[0] + "_JP" in fireflySpeaker:
+                        p = await superVG({"text": txt, "speaker": str(event.message_chain).split("说")[0] + "_JP"},
+                                          "firefly")
+                        await bot.send(event, Voice(path=p))
+                        return
+                    elif str(event.message_chain).split("说")[0] + "_EN" in fireflySpeaker:
+                        p = await superVG({"text": txt, "speaker": str(event.message_chain).split("说")[0] + "_EN"},
+                                          "firefly")
+                        await bot.send(event, Voice(path=p))
+                        return
+                    elif str(event.message_chain).split("说")[0] in fireflySpeaker:
+                        p = await superVG(data={"text": txt, "speaker": str(event.message_chain).split("说")[0]},
+                                          mode="firefly", langmode="<jp>")
+                        await bot.send(event, Voice(path=p))
+                        return
+                    else:
+                        return
+                except:
+                    logger.warning("重新请求")
+                    ib += 1
+            if ib > 6:
+                await bot.send(event, "语音合成错误")
+
 
         if "角色"==str(event.message_chain).replace("@"+str(bot.qq)+" ","") and At(bot.qq) in event.message_chain:
             logger.info("查询可用角色模板")

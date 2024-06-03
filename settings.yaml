@@ -41,7 +41,7 @@ chatGLM:
   voiceRate: 60 #语音回复几率,为0则不开启
   langType: <jp>    #语音合成语言类型，如firefly模式角色未标注类型，如黑崎小雪，请设置为默认<jp>
   #modelscopeTTS模式可用角色["BT","塔菲","阿梓","otto","丁真","星瞳","东雪莲","嘉然","孙笑川","亚托克斯","文静","鹿鸣","奶绿","七海","恬豆","科比"]，该模式下任选其一填入即可
-  speaker: 宫子（泳装）          #语音合成默认音源，根据你的合成模式设定。firefly模式看speaker.txt
+  speaker: 宫子（泳装）          #语音合成默认音源，根据你的合成模式设定。firefly模式看speaker.txt，
   withText: true    #使用语音合成时，发送语音是否附带原始文本(你知道的，塔菲很唐，说话不太清)
   #bot角色设定 default和自定义这种都是chatacterglm的，剩下各配各的
   bot_info:
