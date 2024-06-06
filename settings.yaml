@@ -1,6 +1,6 @@
 bot:
   http-api-key: '1234567890'   #mirai-api-http的verify key
-  http-api-port: 23456         #mirai-api-http的port
+  http-api-port: 23456         #mirai-api-http的ws port
   botqq: 3377428814            #机器人的qq
   master: 1840094972           #你的qq
   botName: yucca               #机器人的名字
@@ -15,7 +15,6 @@ apiKeys:
   modelscopeCookie: ''  #modelcop更新反爬策略，需要cookie，参考https://github.com/avilliai/Manyana/issues/7
 gpt3.5-dev: false     #申请的免费apikey请将此选项修改为True
 proxy: ''             #代理，如果是clash，一般填"http://127.0.0.1:7890" 如果ssr，一般"http://127.0.0.1:1080" 如果v2ray，一般"http://127.0.0.1:10809"
-#chatglm配置
 chatGLM:
   model: random  #ai模型，random(自动选取免费可用模型，不包括anotherGPT) anotherGPT3.5,grop,kimi、清言、lingyi、step、通义千问、gptX,lolimigpt,glm-4(免费无需配置)|后面几个需要自己配置api.yaml对应变量: characterglm(对应chatGLM),Gemini或Gemini1.5(对应的Gemini),Cozi(同名),gpt3.5(官方openai-keys),gpt3.5(无需代理、免费的openai-keys，需要勾选gpt3.5-dev)
   random&PriorityModel: #random模式下，模型调用顺序，确保稳定性
@@ -30,19 +29,20 @@ chatGLM:
   - gptX
   - gpt4hahaha
   #下面两个开关都关闭时，只有授权群可用
-  glmReply: true        #开放群聊chatglm
-  friendRep: true       #开放私聊
-  privateGlmReply: false   #仅信任用户可用
-  context: true         #chatGLM上下文模式，开启后将加速消耗token
-  maxPrompt: 10              #上下文模式开启时，最多记录的问答数量，默认10，即记录5对问答
+  glmReply: true                #开放群聊
+  friendRep: true               #开放私聊
+  privateGlmReply: false        #仅信任用户可用
+  context: true                 #模型上下文模式，开启后将加速消耗token
+  maxPrompt: 10                 #上下文模式开启时，最多记录的问答数量，默认10，即记录5对问答
   #语音合成配置部分
   voiceGenerateSource: firefly  #可选modelscopeTTS和firefly
-  maxLen: 70    #语音合成最大长度限制，超出则返回文本。
-  voiceRate: 60 #语音回复几率,为0则不开启
-  langType: <jp>    #语音合成语言类型，如firefly模式角色未标注类型，如黑崎小雪，请设置为默认<jp>
+  maxLen: 70                    #语音合成最大长度限制，超出则返回文本。
+  voiceRate: 60                 #语音回复几率,为0则不开启
+  FriendMesVoiceRate: 60        #私聊语音几率
+  langType: <jp>                #语音合成语言类型，如firefly模式角色未标注类型，如黑崎小雪，请设置为默认<jp>
   #modelscopeTTS模式可用角色["BT","塔菲","阿梓","otto","丁真","星瞳","东雪莲","嘉然","孙笑川","亚托克斯","文静","鹿鸣","奶绿","七海","恬豆","科比"]，该模式下任选其一填入即可
-  speaker: 宫子（泳装）          #语音合成默认音源，根据你的合成模式设定。firefly模式看speaker.txt，
-  withText: true    #使用语音合成时，发送语音是否附带原始文本(你知道的，塔菲很唐，说话不太清)
+  speaker: 宫子（泳装）            #语音合成默认音源，根据你的合成模式设定。firefly模式看speaker.txt，
+  withText: true                 #发送语音是否附带原始文本
   #bot角色设定 default和自定义这种都是chatacterglm的，剩下各配各的
   bot_info:
     default: #改改user_name就可以了，bot_name什么的到时候都会自动替换，不用折腾。

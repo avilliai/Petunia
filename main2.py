@@ -309,6 +309,7 @@ def main(bot,logger):
     allcharacters=result.get("chatGLM").get("bot_info")
     maxTextLen = result.get("chatGLM").get("maxLen")
     voiceRate = result.get("chatGLM").get("voiceRate")
+    FriendMesVoiceRate=result.get("chatGLM").get("FriendMesVoiceRate")
     speaker = result.get("chatGLM").get("speaker")
     friendRep=result.get("chatGLM").get("friendRep")
     randomModelPriority = result.get("chatGLM").get("random&PriorityModel")
@@ -1209,7 +1210,7 @@ def main(bot,logger):
             await bot.send(event,[f"modelscope可用speaker:{str(modelScope)}",Image(path="data/图片-1717384652980.png")])
             await bot.send(event,"可发送 xx说xxxxxxxx")
     async def tstt(r, event):
-        if len(r) < maxTextLen and random.randint(0, 100) < voiceRate:
+        if len(r) < maxTextLen and ((random.randint(0, 100) < voiceRate and event.type== 'GroupMessage') or (random.randint(0, 100) < FriendMesVoiceRate and event.type== 'FriendMessage')):
             data1 = {}
             data1['speaker'] = speaker
 
@@ -1315,7 +1316,7 @@ def main(bot,logger):
                                 "content") or "敏感词汇" in result.get("content") or "request id" in result.get(
                             "content") or "This model's maximum" in result.get(
                             "content") or "solve CAPTCHA to" in result.get("content") or "输出错误请联系站长" in result.get(
-                            "content") or "接口失败" in result.get("content") or "ip请求过多" in result.get("content"):
+                            "content") or "接口失败" in result.get("content") or "ip请求过多" in result.get("content") or "响应错误" in result.get("content"):
                             continue
                         reps[task.result()[0]] = task.result()[1]
                         # reps.append(task.result())  # 添加可用结果
