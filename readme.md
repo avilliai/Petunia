@@ -35,7 +35,7 @@ bot:
 | 模型(settings.yaml中的model设置)    | 介绍                                                                                                                                   | 配置项(apikeys对应)             | 评价                                               |
 |-------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|---------------------------|--------------------------------------------------|
 | characterglm                  | 智谱的超拟人大模型，在这里[申请](https://open.bigmodel.cn/)                                                                                         | chatGLMKey                   | 付费api，效果好。群少/自用可优先选择                             |
-| kimi、清言、lingyi、step、通义千问、gptX，glm-4、lolimigpt | 任选其一填入即可，免费无需配置、较稳定                                                                                                                  | 【无需配置】                    | 免费，较稳定                                           |
+| kimi、清言、lingyi、step、通义千问、gptX，glm-4、lolimigpt | 任选其一填入即可，免费无需配置、较稳定                                                                                                                  | 【无需配置】                    | 免费，较稳定                               |
 
 | gpt3.5                        | 官方gpt3.5，需要填写代理proxy项                                                                                                                | openai-keys<br>proxy      | 不建议使用，官方贵，并且需要配置代理                               |
 | gpt3.5                        | 同样是gpt3.5，无需代理，[免费申请apikey](https://github.com/chatanywhere/GPT_API_free?tab=readme-ov-file) 使用此apikey需要把gpt3.5-dev的值修改为true         | openai-keys<br>gpt3.5-dev | 免费，稳定，每天限制100次，不建议使用。                                   |
