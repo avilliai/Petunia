@@ -15,7 +15,7 @@
 >settings.yaml配置文件的每一个可配置项基本都有注释
 
 这里是十分重要的一部分<br>
-## 与Mirai连接(overflow用户一样，本身就一家的。)
+## 与Mirai连接(overflow一样)
 确保已安装[mirai-api-http](https://github.com/project-mirai/mirai-api-http) 并[正确配置](https://github.com/avilliai/wReply/blob/master/setting.yml) <br>
 如果你用的是[配置](https://github.com/avilliai/wReply/blob/master/setting.yml) ，编辑后三项即可<br>
 ```
@@ -29,18 +29,19 @@ bot:
 ## 选择模型
 **如果你只想用不需要代理、免费、不用配置的模型，那不用看下面这一堆了，默认的random几乎包含所有免费模型。**
 
-模型可选lolimigpt(免费无需key，不稳定)/glm-4(免费无需key，不稳定)/Gemini(免费需代理，配置geminiapiKey)/Cozi(免费需代理，配置CoziUrl)/characterglm(付费，配置chatGLMKey)/gpt3.5(付费，配置openaikeys)<br>
+
 
 
 | 模型(settings.yaml中的model设置)    | 介绍                                                                                                                                   | 配置项(apikeys对应)             | 评价                                               |
 |-------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|---------------------------|--------------------------------------------------|
 | characterglm                  | 智谱的超拟人大模型，在这里[申请](https://open.bigmodel.cn/)                                                                                         | chatGLMKey                   | 付费api，效果好。群少/自用可优先选择                             |
-| kimi、清言、lingyi、step、通义千问、gptX | 任选其一填入即可，免费无需配置、较稳定                                                                                                                  | 【无需配置】                    | 免费，较稳定                                           |
-| glm-4、lolimigpt               | 任选其一填入，免费无需配置，不太稳定                                                                                                                   | 【无需配置】                    | 免费，不稳定                                           |
-| gpt3.5                        | 官方gpt3.5，需要填写代理proxy项                                                                                                                | openai-keys<br>proxy      | 不建议使用，官方贵，并且需要配置代理                               |
-| gpt3.5                        | 同样是gpt3.5，无需代理，[免费申请apikey](https://github.com/chatanywhere/GPT_API_free?tab=readme-ov-file) 使用此apikey需要把gpt3.5-dev的值修改为true         | openai-keys<br>gpt3.5-dev | 免费，稳定，有每日次数限制                                    |
-| Cozi                          | GPT4，基于[coze-discord](https://github.com/deanxv/coze-discord-proxy)，教程请查看[Here](https://github.com/avilliai/Manyana/issues/4)，最好配置代理 | cozi<br>proxy(建议)         | 免费。需要discord小号，每个账号每天都有次数限制(gpt4 100次/天)，可配置多个小号 |
 | gemini                        | 谷歌Gemini，在这里[申请apikey](https://ai.google.dev/tutorials/setup?hl=zh-cn)，需配置proxy                                                      | gemini<br>proxy           | 免费，稳定，有代理时首选                                     |
+| random | 稳定，免费，无代理首选，包括下面列出的所有无需配置的免费模型                                                                                                                  | 【无需配置】                    | 免费，稳定，无需代理                               |
+| kimi、清言、lingyi、step、通义千问、gptX，glm-4、lolimigpt | 任选其一填入即可，免费无需配置、较稳定，不如直接填random                                                                                                                 | 【无需配置】                    | 免费，较稳定                               |
+| gpt3.5                        | 官方gpt3.5，需要填写代理proxy项                                                                                                                | openai-keys<br>proxy      | 不建议使用，官方贵，并且需要配置代理                               |
+| gpt3.5                        | 同样是gpt3.5，无需代理，[免费申请apikey](https://github.com/chatanywhere/GPT_API_free?tab=readme-ov-file) 使用此apikey需要把gpt3.5-dev的值修改为true         | openai-keys<br>gpt3.5-dev | 不建议使用，免费，稳定，每天限制100次                                   |
+| Cozi                          | GPT4，基于[coze-discord](https://github.com/deanxv/coze-discord-proxy)，教程请查看[Here](https://github.com/avilliai/Manyana/issues/4)，最好配置代理 | cozi<br>proxy(建议)         | 免费。需要discord小号，每个账号每天都有次数限制(gpt4 100次/天)，可配置多个小号 |
+
 
 ```
 chatGLM:
