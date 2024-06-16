@@ -31,11 +31,29 @@ def anotherGPT35(prompt,id):
     r = requests.get(url).json()["data"]["message"]
     return {"role": "assistant", "content": r}
 async def translate(text,mode="ZH_CN2JA"):
-    URL=f"https://api.pearktrue.cn/api/translate/?text={text}&type={mode}"
-    async with httpx.AsyncClient(timeout=20) as client:
-        r = await client.get(URL)
-        #print(r.json()["data"]["translate"])
-        return r.json()["data"]["translate"]
+    try:
+        URL = f"https://api.pearktrue.cn/api/translate/?text={text}&type={mode}"
+        async with httpx.AsyncClient(timeout=20) as client:
+            r = await client.get(URL)
+            # print(r.json()["data"]["translate"])
+            return r.json()["data"]["translate"]
+    except:
+        print("文本翻译接口1失效")
+        if mode != "ZH_CN2JA":
+            return text
+    try:
+        url = f"https://findmyip.net/api/translate.php?text={text}&target_lang=ja"
+        r = requests.get(url=url, timeout=10)
+        return r.json()["data"]["translate_result"]
+    except:
+        print("翻译接口2调用失败")
+    try:
+        url = f"https://translate.appworlds.cn?text={text}&from=zh-CN&to=ja"
+        r = requests.get(url=url, timeout=10, verify=False)
+        return r.json()["data"]
+    except:
+        print("翻译接口3调用失败")
+    return text
 
 def cozeBotRep(url,text,proxy,channelid=None):
     os.environ["http_proxy"] = proxy
@@ -152,7 +170,7 @@ async def geminirep(ak, messages):
     ]
 
     model = genai.GenerativeModel(
-        model_name="gemini-pro",
+        model_name="gemini-1.5-flash",
         generation_config=generation_config,
         safety_settings=safety_settings
     )
